@@ -92,10 +92,9 @@
                 </div>
                 
                 <div class="space-y-3 mb-4">
-                    <!-- Tienda Flor -->
                     <div class="flex justify-between items-center bg-black/20 p-3 rounded-xl border border-white/5 cursor-pointer hover:bg-white/5 transition" onclick="abrirTienda('Flor')">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center font-bold shadow-lg shadow-pink-500/30">F</div>
+                            <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center font-bold shadow-lg shadow-pink-500/30 text-white">F</div>
                             <div>
                                 <p class="text-sm font-semibold">Flor</p>
                                 <p class="text-xs text-yellow-400 font-bold" id="pts-flor">0 pts</p>
@@ -104,10 +103,9 @@
                         <span class="text-[10px] text-gray-400 uppercase tracking-wide bg-black/40 px-2 py-1 rounded">Ver Tienda <i class="fa-solid fa-chevron-right ml-1"></i></span>
                     </div>
 
-                    <!-- Tienda Nahu -->
                     <div class="flex justify-between items-center bg-black/20 p-3 rounded-xl border border-white/5 cursor-pointer hover:bg-white/5 transition" onclick="abrirTienda('Nahu')">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold shadow-lg shadow-blue-500/30">N</div>
+                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold shadow-lg shadow-blue-500/30 text-white">N</div>
                             <div>
                                 <p class="text-sm font-semibold">Nahu</p>
                                 <p class="text-xs text-yellow-400 font-bold" id="pts-nahu">0 pts</p>
@@ -128,9 +126,7 @@
                     <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-calendar-days text-blue-400 mr-2"></i>Nuestra Rutina</h2>
                     <button onclick="toggleModal('modal-rutina')" class="bg-blue-500/20 text-blue-400 hover:bg-blue-500/40 w-8 h-8 rounded-full flex items-center justify-center transition active:scale-95"><i class="fa-solid fa-plus"></i></button>
                 </div>
-                <div class="space-y-2" id="lista-rutina">
-                    <!-- Eventos generados por JS -->
-                </div>
+                <div class="space-y-2" id="lista-rutina"></div>
             </div>
         </div>
 
@@ -153,13 +149,10 @@
                     <option value="Nahu">Solo deudas de Nahu a Flor</option>
                 </select>
 
-                <!-- Historial -->
-                <ul id="transaccion-list" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar pb-2">
-                    <!-- JS inyectará los gastos aquí -->
-                </ul>
+                <ul id="transaccion-list" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar pb-2"></ul>
             </div>
 
-            <!-- Nuevo Gasto Formulario -->
+            <!-- Nuevo Gasto -->
             <div class="glass p-5" id="form-content">
                 <h2 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider"><i class="fa-solid fa-receipt text-green-400 mr-2"></i>Registrar Gasto</h2>
                 <form id="transaccion-form" class="space-y-4">
@@ -202,22 +195,18 @@
 
         <!-- ================= VISTA 3: JUEGOS Y PICANTE ================= -->
         <div id="view-games" class="view-section hidden space-y-6">
-            
-            <!-- Ruleta Planes -->
             <div class="glass p-5 text-center">
                 <h2 class="text-sm font-bold text-gray-300 mb-2 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot text-indigo-400 mr-2"></i>¿Qué hacemos hoy?</h2>
                 <div id="res-plan" class="text-lg font-bold text-white min-h-[64px] flex items-center justify-center italic bg-black/20 rounded-xl border border-white/5 mb-3 px-2">Toca para elegir un plan</div>
                 <button onclick="girarRuleta('plan')" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold shadow-lg shadow-indigo-500/30 transition active:scale-95">Girar Ruleta de Planes</button>
             </div>
 
-            <!-- Ruleta Comida -->
             <div class="glass p-5 text-center border-t border-green-500/30">
                 <h2 class="text-sm font-bold text-gray-300 mb-2 uppercase tracking-wider"><i class="fa-solid fa-burger text-green-400 mr-2"></i>¿Qué Comemos?</h2>
                 <div id="res-comida" class="text-lg font-bold text-white min-h-[64px] flex items-center justify-center italic bg-black/20 rounded-xl border border-white/5 mb-3 px-2">Se acabó el "lo que quieras"</div>
                 <button onclick="girarRuleta('comida')" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-xl font-bold shadow-lg shadow-green-500/30 transition active:scale-95">Girar Ruleta de Comida</button>
             </div>
 
-            <!-- ZONA PICANTE (Elegante y Extrema) -->
             <div class="glass-hot p-5 rounded-2xl relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-10 text-9xl"><i class="fa-solid fa-fire"></i></div>
                 <h2 class="text-xl font-bold text-red-500 mb-2"><i class="fa-solid fa-fire-flame-curved mr-2"></i>Zona Picante</h2>
@@ -234,10 +223,32 @@
             </div>
         </div>
 
-        <!-- ================= VISTA 4: NEGOCIO (3D + APPILAR) ================= -->
-        <div id="view-business" class="view-section hidden space-y-6">
+        <!-- ================= VISTA 4: NUESTRO FUTURO (NUEVO) ================= -->
+        <div id="view-future" class="view-section hidden space-y-6">
             
-            <!-- Selector de Negocio Flotante -->
+            <!-- Tablero de Ideas -->
+            <div class="glass p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-lightbulb text-yellow-400 mr-2"></i>Ideas para la Casa</h2>
+                    <button onclick="toggleModal('modal-idea')" class="bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/40 w-8 h-8 rounded-full flex items-center justify-center transition active:scale-95"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <p class="text-xs text-gray-400 mb-3">Guarden acá cosas que vean en Pinterest, muebles o colores que les gusten.</p>
+                <div class="space-y-2" id="lista-ideas"></div>
+            </div>
+
+            <!-- Terrenos y Propiedades -->
+            <div class="glass p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot text-emerald-400 mr-2"></i>Terrenos en Vista</h2>
+                    <button onclick="toggleModal('modal-terreno')" class="bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/40 w-8 h-8 rounded-full flex items-center justify-center transition active:scale-95"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="space-y-3" id="lista-terrenos"></div>
+            </div>
+
+        </div>
+
+        <!-- ================= VISTA 5: NEGOCIO (3D + APPILAR) ================= -->
+        <div id="view-business" class="view-section hidden space-y-6">
             <div class="flex bg-black/40 p-1 rounded-full border border-white/10 mb-6 mx-auto w-fit">
                 <button onclick="switchBusinessTab('3d')" id="btn-tab-3d" class="px-6 py-2 rounded-full text-sm font-bold bg-blue-600 text-white shadow-lg transition">3D</button>
                 <button onclick="switchBusinessTab('ml')" id="btn-tab-ml" class="px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition">Appilar Store</button>
@@ -247,14 +258,11 @@
             <div id="b-tab-3d" class="space-y-6">
                 <div class="glass p-5">
                     <h2 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider"><i class="fa-solid fa-cube text-blue-400 mr-2"></i>Calculadora 3D</h2>
-                    
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
                             <label class="text-[10px] text-gray-400 uppercase font-bold">Material</label>
                             <select class="w-full bg-black/30 border border-white/10 rounded-xl p-2 text-sm text-white outline-none">
-                                <option>PLA Estándar</option>
-                                <option>PETG</option>
-                                <option>TPU / Flex</option>
+                                <option>PLA Estándar</option><option>PETG</option><option>TPU / Flex</option>
                             </select>
                         </div>
                         <div>
@@ -262,7 +270,6 @@
                             <input type="number" id="calc3d-precio-kg" value="23500" oninput="calc3D()" class="w-full bg-black/30 border border-white/10 rounded-xl p-2 text-sm text-white outline-none font-bold text-blue-400">
                         </div>
                     </div>
-
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div class="bg-black/20 p-3 rounded-xl border border-white/5">
                             <label class="text-[10px] text-gray-400 uppercase font-bold mb-1 block">Gramos</label>
@@ -273,7 +280,6 @@
                             <input type="number" id="calc3d-hs" placeholder="0.0" step="0.1" oninput="calc3D()" class="w-full bg-transparent text-xl font-bold text-white outline-none">
                         </div>
                     </div>
-
                     <div class="space-y-2">
                         <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl">
                             <span class="text-xs text-gray-400">Costo Base (+25%)</span>
@@ -295,7 +301,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN APPILAR STORE (MERCADOLIBRE) -->
+            <!-- SECCIÓN APPILAR STORE -->
             <div id="b-tab-ml" class="space-y-6 hidden">
                 <div class="glass p-5">
                     <div class="flex justify-between items-center mb-6">
@@ -305,7 +311,6 @@
                             <input type="number" id="calcML-usdt" value="1582" oninput="calcML()" class="bg-black/30 w-20 px-2 py-1 rounded text-emerald-400 font-bold text-xs outline-none text-right border border-white/10">
                         </div>
                     </div>
-
                     <div class="bg-black/30 p-4 rounded-xl border border-white/10 mb-5 relative">
                         <label class="text-[10px] text-gray-400 uppercase font-bold mb-1 block">Costo Producto (USD)</label>
                         <div class="flex items-center">
@@ -313,8 +318,6 @@
                             <input type="number" id="calcML-costo" placeholder="0.00" oninput="calcML()" class="w-full bg-transparent text-2xl font-bold text-white outline-none">
                         </div>
                     </div>
-
-                    <!-- Botones Toggle Modernos -->
                     <div class="grid grid-cols-2 gap-3 mb-5">
                         <label class="cursor-pointer relative">
                             <input type="checkbox" id="ml-tarjeta" onchange="calcML()" class="peer sr-only">
@@ -341,7 +344,6 @@
                             </div>
                         </label>
                     </div>
-
                     <div class="mb-5">
                         <label class="text-[10px] text-gray-400 uppercase font-bold block mb-2">Modalidad ML (Cuotas)</label>
                         <select id="ml-cuotas" onchange="calcML()" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white outline-none">
@@ -351,12 +353,9 @@
                             <option value="12.3">6 Sin Interés (12.3%)</option>
                         </select>
                     </div>
-
-                    <!-- Resultados ML -->
                     <div class="bg-gradient-to-br from-gray-900 to-black p-5 rounded-2xl border border-emerald-500/30 shadow-lg mt-6">
                         <p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Precio a Publicar</p>
                         <p class="text-4xl font-black text-white tracking-tight mb-4" id="resML-publicar">$0</p>
-                        
                         <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3">
                             <p class="text-[10px] text-emerald-300 uppercase font-bold mb-1">Tu Ganancia Neta Libre</p>
                             <p class="text-2xl font-bold text-emerald-400" id="resML-ganancia">$0</p>
@@ -364,71 +363,66 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-    </div> <!-- Fin Container Principal -->
+    </div>
 
-    <!-- ================= NAVEGACIÓN INFERIOR ================= -->
+    <!-- ================= NAVEGACIÓN INFERIOR (5 TABS) ================= -->
     <nav class="fixed bottom-0 left-0 right-0 w-full bg-[#0f172a]/95 backdrop-blur-md border-t border-white/10 z-40">
-        <div class="max-w-md mx-auto flex flex-row justify-around items-center text-gray-400 text-xs pt-3 pb-6 px-2">
+        <div class="max-w-md mx-auto flex flex-row justify-between items-center text-gray-400 text-xs pt-3 pb-6 px-4">
             
-            <div onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center cursor-pointer text-white transition-all transform hover:scale-110 w-16 text-center">
-                <i class="fa-solid fa-house mb-1 text-[20px]"></i><span class="font-medium mt-1 text-[10px]">Inicio</span>
+            <div onclick="switchTab('home')" id="nav-home" class="flex-1 flex flex-col items-center cursor-pointer text-white transition-all transform hover:scale-110 text-center">
+                <i class="fa-solid fa-house mb-1 text-[18px]"></i><span class="font-medium mt-1 text-[9px] uppercase">Inicio</span>
             </div>
             
-            <div onclick="switchTab('finance')" id="nav-finance" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
-                <i class="fa-solid fa-wallet mb-1 text-[20px]"></i><span class="font-medium mt-1 text-[10px]">Finanzas</span>
+            <div onclick="switchTab('finance')" id="nav-finance" class="flex-1 flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 text-center">
+                <i class="fa-solid fa-wallet mb-1 text-[18px]"></i><span class="font-medium mt-1 text-[9px] uppercase">Finanzas</span>
             </div>
             
-            <div onclick="switchTab('games')" id="nav-games" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
-                <i class="fa-solid fa-gamepad mb-1 text-[20px]"></i><span class="font-medium mt-1 text-[10px]">Juegos</span>
+            <div onclick="switchTab('games')" id="nav-games" class="flex-1 flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 text-center">
+                <i class="fa-solid fa-gamepad mb-1 text-[18px]"></i><span class="font-medium mt-1 text-[9px] uppercase">Juegos</span>
+            </div>
+
+            <div onclick="switchTab('future')" id="nav-future" class="flex-1 flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 text-center">
+                <i class="fa-solid fa-house-chimney-window mb-1 text-[18px]"></i><span class="font-medium mt-1 text-[9px] uppercase">Futuro</span>
             </div>
             
-            <div onclick="switchTab('business')" id="nav-business" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
-                <i class="fa-solid fa-briefcase mb-1 text-[20px]"></i><span class="font-medium mt-1 text-[10px]">Negocio</span>
+            <div onclick="switchTab('business')" id="nav-business" class="flex-1 flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 text-center">
+                <i class="fa-solid fa-briefcase mb-1 text-[18px]"></i><span class="font-medium mt-1 text-[9px] uppercase">Negocio</span>
             </div>
             
         </div>
     </nav>
 
-    <!-- ================= MODALES (SIN ALERTAS FEAS) ================= -->
+    <!-- ================= MODALES ================= -->
     
-    <!-- Modal: Info Mercado Favores -->
+    <!-- Modales de Favores (Info, Sumar, Tienda) -->
     <div id="modal-info-favores" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
         <div class="glass-modal p-6 w-full max-w-sm relative">
             <button onclick="toggleModal('modal-info-favores')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-lg font-bold mb-3 text-yellow-400"><i class="fa-solid fa-circle-info mr-2"></i>¿Cómo funciona?</h3>
-            <p class="text-sm text-gray-300 mb-3 leading-relaxed">
-                El <strong>Mercado de Favores</strong> es un juego para premiar los buenos gestos diarios. 
-                Si haces algo lindo por el otro (ej: limpiar, cocinar, hacer un masaje sin que te lo pidan), sumas puntos tocando "Registrar Buena Acción".
-            </p>
-            <p class="text-sm text-gray-300 leading-relaxed">
-                Esos puntos se acumulan en tu billetera y luego puedes usarlos entrando a tu <strong>Tienda</strong> para "comprar" recompensas que tu pareja deberá cumplir.
-            </p>
+            <p class="text-sm text-gray-300 mb-3 leading-relaxed">El <strong>Mercado de Favores</strong> es un juego para premiar los buenos gestos diarios. Si haces algo lindo por el otro, sumas puntos tocando "Registrar Buena Acción".</p>
+            <p class="text-sm text-gray-300 leading-relaxed">Esos puntos se acumulan en tu billetera y luego puedes usarlos entrando a tu <strong>Tienda</strong> para "comprar" recompensas que tu pareja deberá cumplir.</p>
             <button onclick="toggleModal('modal-info-favores')" class="mt-6 w-full bg-white/10 hover:bg-white/20 py-2 rounded-xl font-bold text-white">Entendido</button>
         </div>
     </div>
 
-    <!-- Modal: Registrar Acción -->
     <div id="modal-sumar-puntos" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-center items-end md:items-center p-4 pb-10">
-        <div class="glass-modal p-6 w-full max-w-sm relative transform transition-all">
+        <div class="glass-modal p-6 w-full max-w-sm relative">
             <button onclick="toggleModal('modal-sumar-puntos')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-lg font-bold mb-4 text-white">¿Quién hizo la buena acción?</h3>
-            
             <div class="grid grid-cols-2 gap-4 mb-5">
                 <button onclick="seleccionarPersonaParaPuntos('Flor')" id="btn-sel-flor" class="p-4 rounded-xl border border-white/10 bg-black/30 hover:bg-pink-900/40 text-center transition">
-                    <div class="w-12 h-12 mx-auto rounded-full bg-pink-500 flex items-center justify-center font-bold text-xl mb-2 text-white shadow-lg shadow-pink-500/30">F</div>
+                    <div class="w-12 h-12 mx-auto rounded-full bg-pink-500 flex items-center justify-center font-bold text-xl mb-2 text-white">F</div>
                     <span class="font-bold text-white">Flor</span>
                 </button>
                 <button onclick="seleccionarPersonaParaPuntos('Nahu')" id="btn-sel-nahu" class="p-4 rounded-xl border border-white/10 bg-black/30 hover:bg-blue-900/40 text-center transition">
-                    <div class="w-12 h-12 mx-auto rounded-full bg-blue-500 flex items-center justify-center font-bold text-xl mb-2 text-white shadow-lg shadow-blue-500/30">N</div>
+                    <div class="w-12 h-12 mx-auto rounded-full bg-blue-500 flex items-center justify-center font-bold text-xl mb-2 text-white">N</div>
                     <span class="font-bold text-white">Nahu</span>
                 </button>
             </div>
-
             <div id="opciones-puntos" class="hidden opacity-0 transition-opacity duration-300">
-                <p class="text-xs text-gray-400 uppercase font-bold mb-2">Selecciona la acción para sumar puntos:</p>
+                <p class="text-xs text-gray-400 uppercase font-bold mb-2">Selecciona la acción:</p>
                 <div class="space-y-2 max-h-48 overflow-y-auto no-scrollbar">
                     <button onclick="ejecutarSuma(20, 'Detalle lindo')" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-sm flex justify-between text-white">
                         <span>Gestos lindos / Ayuda pequeña</span><span class="text-yellow-400 font-bold">+20</span>
@@ -447,93 +441,89 @@
         </div>
     </div>
 
-    <!-- Modal: Tienda (Canje) -->
     <div id="modal-tienda" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex justify-center items-center p-4">
         <div class="glass-modal p-6 w-full max-w-sm relative flex flex-col max-h-[80vh]">
             <button onclick="cerrarTienda()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-            
             <div class="flex items-center space-x-3 mb-4">
-                <div id="tienda-avatar" class="w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center font-bold text-xl shadow-lg text-white">X</div>
+                <div id="tienda-avatar" class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg text-white">X</div>
                 <div>
                     <h3 class="text-lg font-bold text-white">Tienda de <span id="tienda-nombre">Nombre</span></h3>
                     <p class="text-sm text-yellow-400 font-bold">Tienes: <span id="tienda-puntos">0</span> pts</p>
                 </div>
             </div>
-
             <div class="overflow-y-auto no-scrollbar space-y-3 flex-1 pb-2">
-                <!-- Items Tienda -->
+                <!-- Tienda Items -->
                 <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="text-sm font-bold text-white">Elegir Película</p>
-                        <p class="text-[10px] text-gray-400">Sin vueltas ni discusiones.</p>
-                    </div>
-                    <button onclick="canjear(100, 'Elegir la Película')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition whitespace-nowrap">100 pts</button>
+                    <div><p class="text-sm font-bold text-white">Elegir Película</p><p class="text-[10px] text-gray-400">Sin discusiones esta noche.</p></div>
+                    <button onclick="canjear(100, 'Elegir la Película')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition">100 pts</button>
                 </div>
-                
                 <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="text-sm font-bold text-white">Desayuno a la Cama</p>
-                        <p class="text-[10px] text-gray-400">El otro debe prepararlo completo.</p>
-                    </div>
-                    <button onclick="canjear(200, 'Desayuno a la Cama')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition whitespace-nowrap">200 pts</button>
+                    <div><p class="text-sm font-bold text-white">Desayuno a la Cama</p><p class="text-[10px] text-gray-400">El otro debe prepararlo completo.</p></div>
+                    <button onclick="canjear(200, 'Desayuno a la Cama')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition">200 pts</button>
                 </div>
-
                 <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="text-sm font-bold text-white">Masaje de 15 Min</p>
-                        <p class="text-[10px] text-gray-400">Masaje relajante cuerpo entero.</p>
-                    </div>
-                    <button onclick="canjear(300, 'Masaje de 15 Min')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition whitespace-nowrap">300 pts</button>
+                    <div><p class="text-sm font-bold text-white">Masaje de 20 Min</p><p class="text-[10px] text-gray-400">Masaje relajante cuerpo entero.</p></div>
+                    <button onclick="canjear(300, 'Masaje de 20 Min')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition">300 pts</button>
                 </div>
-
                 <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="text-sm font-bold text-white">Tráeme un Antojito</p>
-                        <p class="text-[10px] text-gray-400">El otro sale a comprar tu snack favorito.</p>
-                    </div>
-                    <button onclick="canjear(400, 'Tráeme un Antojito')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition whitespace-nowrap">400 pts</button>
+                    <div><p class="text-sm font-bold text-white">Noche Libre de Quejas</p><p class="text-[10px] text-gray-400">El otro no puede quejarse de nada.</p></div>
+                    <button onclick="canjear(400, 'Noche Libre de Quejas')" class="bg-yellow-600/80 hover:bg-yellow-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition">400 pts</button>
                 </div>
-
                 <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                        <p class="text-sm font-bold text-white">Día del "Sí a Todo"</p>
-                        <p class="text-[10px] text-gray-400">El otro accede a planes razonables por 12h.</p>
-                    </div>
-                    <button onclick="canjear(1000, 'Día del Sí a Todo')" class="bg-red-600/80 hover:bg-red-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition whitespace-nowrap shadow-lg shadow-red-500/20">1000 pts</button>
+                    <div><p class="text-sm font-bold text-white">Tener la Razón</p><p class="text-[10px] text-gray-400">Ganas la discusión automáticamente.</p></div>
+                    <button onclick="canjear(1000, 'Tener la Razón')" class="bg-red-600/80 hover:bg-red-500 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition shadow-lg shadow-red-500/20">1000 pts</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Agregar Rutina -->
+    <!-- Modales Rutina y Futuro -->
     <div id="modal-rutina" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
         <div class="glass-modal p-6 w-full max-w-sm relative">
             <button onclick="toggleModal('modal-rutina')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-lg font-bold mb-4 text-white">Agregar a la Rutina</h3>
-            
             <div class="space-y-4">
                 <div>
                     <label class="text-[10px] text-gray-400 uppercase font-bold">¿De quién es?</label>
                     <select id="rutina-quien" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white outline-none mt-1">
-                        <option value="pink">Flor</option>
-                        <option value="blue">Nahu</option>
-                        <option value="green">Ambos</option>
+                        <option value="pink">Flor</option><option value="blue">Nahu</option><option value="green">Ambos</option>
                     </select>
                 </div>
-                <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold">¿Qué actividad?</label>
-                    <input type="text" id="rutina-texto" placeholder="Ej: Clase de Baile" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white outline-none mt-1">
-                </div>
-                <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold">Día y Hora</label>
-                    <input type="text" id="rutina-fecha" placeholder="Ej: Martes 18:00hs" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white outline-none mt-1">
-                </div>
-                <button onclick="guardarRutina()" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition active:scale-95 text-white">Guardar en Calendario</button>
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">¿Qué actividad?</label><input type="text" id="rutina-texto" placeholder="Ej: Clase de Baile" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">Día y Hora</label><input type="text" id="rutina-fecha" placeholder="Ej: Martes 18:00hs" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <button onclick="guardarRutina()" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-xl font-bold shadow-lg text-white">Guardar en Calendario</button>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION (Reemplaza a los alerts) -->
+    <!-- Modal Idea -->
+    <div id="modal-idea" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+        <div class="glass-modal p-6 w-full max-w-sm relative">
+            <button onclick="toggleModal('modal-idea')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-lg font-bold mb-4 text-white">Guardar Idea para Casa</h3>
+            <div class="space-y-4">
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">¿Qué es?</label><input type="text" id="idea-texto" placeholder="Ej: Sillón esquinero gris" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">Link (Opcional)</label><input type="text" id="idea-link" placeholder="Ej: https://pinterest.com/..." class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <button onclick="guardarIdea()" class="w-full bg-yellow-600 hover:bg-yellow-500 py-3 rounded-xl font-bold shadow-lg text-white">Guardar Idea</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Terreno -->
+    <div id="modal-terreno" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+        <div class="glass-modal p-6 w-full max-w-sm relative">
+            <button onclick="toggleModal('modal-terreno')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-lg font-bold mb-4 text-white">Guardar Terreno/Propiedad</h3>
+            <div class="space-y-4">
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">Ubicación / Título</label><input type="text" id="terreno-titulo" placeholder="Ej: Lote 500m2 en Pilar" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">Precio (USD/ARS)</label><input type="text" id="terreno-precio" placeholder="Ej: USD 15.000" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <div><label class="text-[10px] text-gray-400 uppercase font-bold">Link Inmobiliaria</label><input type="text" id="terreno-link" placeholder="Ej: https://zonaprop..." class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white mt-1 outline-none"></div>
+                <button onclick="guardarTerreno()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-3 rounded-xl font-bold shadow-lg text-white">Guardar Propiedad</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-24 left-4 right-4 mx-auto max-w-sm bg-gray-900 border border-gray-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 toast-enter z-50 pointer-events-none">
         <i id="toast-icon" class="fa-solid fa-circle-check text-green-400 text-lg"></i>
         <span id="toast-msg" class="text-sm font-medium">Notificación</span>
@@ -541,7 +531,6 @@
 
     <!-- LÓGICA JAVASCRIPT -->
     <script>
-        // === NAVEGACIÓN ===
         function switchTab(tabId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('nav div').forEach(el => { el.classList.remove('text-white'); el.classList.add('text-gray-400'); });
@@ -550,52 +539,36 @@
             document.getElementById(`nav-${tabId}`).classList.add('text-white');
         }
 
-        // === ESTADO LOCAL (Reseteado para la nueva versión) ===
-        const VERSION_APP = "2.1"; // Subí la versión para forzar el reseteo de puntos si quedaron mal en tu caché
+        const VERSION_APP = "2.2";
         let appState = JSON.parse(localStorage.getItem('flornahu_state'));
         
         if (!appState || appState.version !== VERSION_APP) {
             appState = {
                 version: VERSION_APP,
-                puntosFlor: 0, 
-                puntosNahu: 0,
-                rutina: [
-                    { id: 1, texto: "Baile", color: "pink", fecha: "Martes 18:00" },
-                    { id: 2, texto: "Clase", color: "blue", fecha: "Lunes 20:00" }
-                ],
-                pastillas: { 'f-m': false, 'n-m': false, 'f-n': false }
+                puntosFlor: appState ? appState.puntosFlor : 0, 
+                puntosNahu: appState ? appState.puntosNahu : 0,
+                rutina: appState ? (appState.rutina || []) : [],
+                pastillas: appState ? (appState.pastillas || { 'f-m': false, 'n-m': false, 'f-n': false }) : { 'f-m': false, 'n-m': false, 'f-n': false },
+                ideas: appState ? (appState.ideas || []) : [],
+                terrenos: appState ? (appState.terrenos || []) : []
             };
             saveState();
         }
 
         function saveState() { localStorage.setItem('flornahu_state', JSON.stringify(appState)); }
 
-        // === NOTIFICACIONES TOAST (Para no usar alerts feos) ===
         let toastTimeout;
         function showToast(msg, isError = false) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
             const icon = document.getElementById('toast-icon');
-            
-            if(isError) {
-                icon.className = "fa-solid fa-circle-exclamation text-red-500 text-lg";
-                toast.style.borderColor = "rgba(239, 68, 68, 0.4)";
-            } else {
-                icon.className = "fa-solid fa-circle-check text-green-400 text-lg";
-                toast.style.borderColor = "rgba(74, 222, 128, 0.4)";
-            }
-
-            toast.classList.remove('toast-enter');
-            toast.classList.add('toast-visible');
-            
+            if(isError) { icon.className = "fa-solid fa-circle-exclamation text-red-500 text-lg"; toast.style.borderColor = "rgba(239, 68, 68, 0.4)"; }
+            else { icon.className = "fa-solid fa-circle-check text-green-400 text-lg"; toast.style.borderColor = "rgba(74, 222, 128, 0.4)"; }
+            toast.classList.remove('toast-enter'); toast.classList.add('toast-visible');
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('toast-visible');
-                toast.classList.add('toast-enter');
-            }, 3500);
+            toastTimeout = setTimeout(() => { toast.classList.remove('toast-visible'); toast.classList.add('toast-enter'); }, 3500);
         }
 
-        // === MODALES ===
         function toggleModal(id) {
             const m = document.getElementById(id);
             m.classList.toggle('hidden');
@@ -608,73 +581,51 @@
             }
         }
 
-        // === MERCADO DE FAVORES: SUMAR ===
+        // ================= FAVORES =================
         let personaSeleccionadaPuntos = null;
         function seleccionarPersonaParaPuntos(quien) {
             personaSeleccionadaPuntos = quien;
-            const btnF = document.getElementById('btn-sel-flor');
-            const btnN = document.getElementById('btn-sel-nahu');
+            document.getElementById('btn-sel-flor').classList.remove('ring-2', 'ring-pink-500', 'bg-pink-900/40');
+            document.getElementById('btn-sel-nahu').classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/40');
+            if(quien === 'Flor') document.getElementById('btn-sel-flor').classList.add('ring-2', 'ring-pink-500', 'bg-pink-900/40');
+            else document.getElementById('btn-sel-nahu').classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/40');
             const opc = document.getElementById('opciones-puntos');
-            
-            btnF.classList.remove('ring-2', 'ring-pink-500', 'bg-pink-900/40');
-            btnN.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-900/40');
-
-            if(quien === 'Flor') btnF.classList.add('ring-2', 'ring-pink-500', 'bg-pink-900/40');
-            else btnN.classList.add('ring-2', 'ring-blue-500', 'bg-blue-900/40');
-
-            opc.classList.remove('hidden');
-            setTimeout(() => opc.classList.remove('opacity-0'), 50);
+            opc.classList.remove('hidden'); setTimeout(() => opc.classList.remove('opacity-0'), 50);
         }
 
         function ejecutarSuma(cant, razon) {
             if(!personaSeleccionadaPuntos) return;
             if (personaSeleccionadaPuntos === 'Flor') appState.puntosFlor += cant;
             else appState.puntosNahu += cant;
-            saveState();
-            renderPuntos();
-            toggleModal('modal-sumar-puntos');
+            saveState(); renderPuntos(); toggleModal('modal-sumar-puntos');
             showToast(`¡Se le sumaron ${cant} pts a ${personaSeleccionadaPuntos}!`);
         }
 
-        // === MERCADO DE FAVORES: TIENDA ===
         let tiendaActiva = null;
         function abrirTienda(quien) {
             tiendaActiva = quien;
             const pts = quien === 'Flor' ? appState.puntosFlor : appState.puntosNahu;
-            
             document.getElementById('tienda-nombre').innerText = quien;
             document.getElementById('tienda-puntos').innerText = pts;
-            
             const avatar = document.getElementById('tienda-avatar');
             avatar.innerText = quien.charAt(0);
             if(quien === 'Flor') avatar.className = "w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg bg-pink-500 shadow-pink-500/30 text-white";
             else avatar.className = "w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg bg-blue-500 shadow-blue-500/30 text-white";
-
             document.getElementById('modal-tienda').classList.remove('hidden');
         }
 
-        function cerrarTienda() {
-            document.getElementById('modal-tienda').classList.add('hidden');
-            tiendaActiva = null;
-        }
+        function cerrarTienda() { document.getElementById('modal-tienda').classList.add('hidden'); tiendaActiva = null; }
 
         function canjear(costo, item) {
             if(!tiendaActiva) return;
             const pts = tiendaActiva === 'Flor' ? appState.puntosFlor : appState.puntosNahu;
-            
             if (pts >= costo) {
-                if (tiendaActiva === 'Flor') appState.puntosFlor -= costo;
-                else appState.puntosNahu -= costo;
-                
-                saveState();
-                renderPuntos();
+                if (tiendaActiva === 'Flor') appState.puntosFlor -= costo; else appState.puntosNahu -= costo;
+                saveState(); renderPuntos();
                 document.getElementById('tienda-puntos').innerText = tiendaActiva === 'Flor' ? appState.puntosFlor : appState.puntosNahu;
-                
                 showToast(`¡Canjeaste: ${item}!`);
                 setTimeout(() => cerrarTienda(), 1500); 
-            } else {
-                showToast(`Te faltan ${costo - pts} puntos.`, true);
-            }
+            } else { showToast(`Te faltan ${costo - pts} puntos.`, true); }
         }
 
         function renderPuntos() {
@@ -682,228 +633,149 @@
             document.getElementById('pts-nahu').innerText = appState.puntosNahu + " pts";
         }
 
-        // === RUTINA EN PAGINA ===
+        // ================= RUTINA =================
         function guardarRutina() {
             const texto = document.getElementById('rutina-texto').value.trim();
             const fecha = document.getElementById('rutina-fecha').value.trim();
             const color = document.getElementById('rutina-quien').value;
-
-            if(!texto || !fecha) {
-                showToast("Por favor, completa todos los campos", true);
-                return;
-            }
-
+            if(!texto || !fecha) { showToast("Por favor, completa todos los campos", true); return; }
             appState.rutina.push({ id: Date.now(), texto, fecha, color });
-            saveState();
-            renderRutina();
-            
-            document.getElementById('rutina-texto').value = '';
-            document.getElementById('rutina-fecha').value = '';
-            toggleModal('modal-rutina');
-            showToast("Agregado al calendario");
+            saveState(); renderRutina();
+            document.getElementById('rutina-texto').value = ''; document.getElementById('rutina-fecha').value = '';
+            toggleModal('modal-rutina'); showToast("Agregado al calendario");
         }
 
         function renderRutina() {
             const lista = document.getElementById('lista-rutina');
-            if(appState.rutina.length === 0) {
-                lista.innerHTML = `<p class="text-center text-xs text-gray-500 italic py-2">No hay rutinas agregadas.</p>`;
-                return;
-            }
+            if(appState.rutina.length === 0) { lista.innerHTML = `<p class="text-center text-xs text-gray-500 italic py-2">No hay rutinas agregadas.</p>`; return; }
             lista.innerHTML = appState.rutina.map(r => `
                 <div class="bg-black/20 p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs group">
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 rounded-full bg-${r.color}-400 mr-3 shadow-[0_0_8px_rgba(255,255,255,0.2)]"></span>
-                        <span class="text-white font-semibold text-[13px]">${r.texto}</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-gray-400 font-medium">${r.fecha}</span>
-                        <button onclick="borrarRutina(${r.id})" class="text-red-500/50 hover:text-red-400 px-1 transition"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-            `).join('');
+                    <div class="flex items-center"><span class="inline-block w-3 h-3 rounded-full bg-${r.color}-400 mr-3 shadow-[0_0_8px_rgba(255,255,255,0.2)]"></span><span class="text-white font-semibold text-[13px]">${r.texto}</span></div>
+                    <div class="flex items-center gap-3"><span class="text-gray-400 font-medium">${r.fecha}</span><button onclick="borrarRutina(${r.id})" class="text-red-500/50 hover:text-red-400 px-1 transition"><i class="fa-solid fa-trash"></i></button></div>
+                </div>`).join('');
         }
-        
-        function borrarRutina(id) {
-            appState.rutina = appState.rutina.filter(r => r.id !== id);
-            saveState();
-            renderRutina();
-        }
+        function borrarRutina(id) { appState.rutina = appState.rutina.filter(r => r.id !== id); saveState(); renderRutina(); }
 
-        // === PASTILLAS ===
+        // ================= FUTURO (CASAS / TERRENOS) =================
+        function guardarIdea() {
+            const texto = document.getElementById('idea-texto').value.trim();
+            const link = document.getElementById('idea-link').value.trim();
+            if(!texto) { showToast("Por favor, describe la idea", true); return; }
+            appState.ideas.push({ id: Date.now(), texto, link });
+            saveState(); renderIdeas();
+            document.getElementById('idea-texto').value = ''; document.getElementById('idea-link').value = '';
+            toggleModal('modal-idea'); showToast("Idea guardada con éxito");
+        }
+        function renderIdeas() {
+            const lista = document.getElementById('lista-ideas');
+            if(!appState.ideas || appState.ideas.length === 0) { lista.innerHTML = `<p class="text-center text-xs text-gray-500 italic py-2">No hay ideas todavía.</p>`; return; }
+            lista.innerHTML = appState.ideas.map(i => `
+                <div class="bg-black/20 p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white block mb-1">${i.texto}</strong>
+                        ${i.link ? `<a href="${i.link}" target="_blank" class="text-[10px] text-yellow-400 hover:underline"><i class="fa-solid fa-link"></i> Ver Idea</a>` : ''}
+                    </div>
+                    <button onclick="borrarIdea(${i.id})" class="text-red-500/50 hover:text-red-400 px-2 transition"><i class="fa-solid fa-trash"></i></button>
+                </div>`).join('');
+        }
+        function borrarIdea(id) { appState.ideas = appState.ideas.filter(i => i.id !== id); saveState(); renderIdeas(); }
+
+        function guardarTerreno() {
+            const titulo = document.getElementById('terreno-titulo').value.trim();
+            const precio = document.getElementById('terreno-precio').value.trim();
+            const link = document.getElementById('terreno-link').value.trim();
+            if(!titulo) { showToast("Ponle un título al terreno", true); return; }
+            appState.terrenos.push({ id: Date.now(), titulo, precio, link });
+            saveState(); renderTerrenos();
+            document.getElementById('terreno-titulo').value = ''; document.getElementById('terreno-precio').value = ''; document.getElementById('terreno-link').value = '';
+            toggleModal('modal-terreno'); showToast("Terreno guardado");
+        }
+        function renderTerrenos() {
+            const lista = document.getElementById('lista-terrenos');
+            if(!appState.terrenos || appState.terrenos.length === 0) { lista.innerHTML = `<p class="text-center text-xs text-gray-500 italic py-2">Aún no hay terrenos vistos.</p>`; return; }
+            lista.innerHTML = appState.terrenos.map(t => `
+                <div class="bg-black/20 p-3 rounded-xl border border-white/5 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white block mb-0.5">${t.titulo}</strong>
+                        ${t.precio ? `<span class="text-emerald-400 font-bold block mb-1">${t.precio}</span>` : ''}
+                        ${t.link ? `<a href="${t.link}" target="_blank" class="inline-block bg-white/10 px-2 py-1 rounded text-[10px] text-gray-300 hover:bg-white/20"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Abrir Link</a>` : ''}
+                    </div>
+                    <button onclick="borrarTerreno(${t.id})" class="text-red-500/50 hover:text-red-400 px-2 transition"><i class="fa-solid fa-trash"></i></button>
+                </div>`).join('');
+        }
+        function borrarTerreno(id) { appState.terrenos = appState.terrenos.filter(t => t.id !== id); saveState(); renderTerrenos(); }
+
+        // ================= PASTILLAS =================
         function renderPastillas() {
             ['f-m', 'n-m', 'f-n'].forEach(id => {
                 let div = document.getElementById(`pastilla-${id}`);
                 let status = div.querySelector('.status');
                 if (appState.pastillas[id]) {
-                    div.classList.replace('bg-black/30', 'bg-green-900/30');
-                    div.classList.replace('border-white/5', 'border-green-500/50');
-                    status.innerText = "Tomada ✓";
-                    status.classList.replace('text-red-400', 'text-green-400');
+                    div.classList.replace('bg-black/30', 'bg-green-900/30'); div.classList.replace('border-white/5', 'border-green-500/50');
+                    status.innerText = "Tomada ✓"; status.classList.replace('text-red-400', 'text-green-400');
                 } else {
-                    div.classList.replace('bg-green-900/30', 'bg-black/30');
-                    div.classList.replace('border-green-500/50', 'border-white/5');
-                    status.innerText = "Pendiente";
-                    status.classList.replace('text-green-400', 'text-red-400');
+                    div.classList.replace('bg-green-900/30', 'bg-black/30'); div.classList.replace('border-green-500/50', 'border-white/5');
+                    status.innerText = "Pendiente"; status.classList.replace('text-green-400', 'text-red-400');
                 }
             });
         }
-        
-        function togglePastilla(id) {
-            appState.pastillas[id] = !appState.pastillas[id];
-            saveState();
-            renderPastillas();
-        }
+        function togglePastilla(id) { appState.pastillas[id] = !appState.pastillas[id]; saveState(); renderPastillas(); }
 
-        // === MEGA RULETAS INTELIGENTES ===
+        // ================= JUEGOS =================
         const bancos = {
-            comida: [
-                "Pizza Casera", "Sushi In/Out", "Hamburguesas Gourmet", "Ensalada César", "Pastas con Salsa Blanca", "Asado / Parrilla", "Picada completa",
-                "Tacos al Pastor", "Fajitas de Pollo", "Empanadas al horno", "Pollo al Curry", "Risotto de Champiñones", "Milanesas con Puré",
-                "Shawarma", "Lasaña", "Canelones de Verdura", "Ñoquis del 29", "Wok de Vegetales", "Cerdo agridulce", "Sopa Crema de Calabaza",
-                "Sándwiches de Miga", "Tostados Mágicos", "Wraps de Atún", "Burritos Mexicanos", "Quesadillas Fundidas", "Fondue de Queso",
-                "Provoleta con Orégano", "Entraña con Fritas", "Matambre a la Pizza", "Choripán con Chimichurri", "Bondiola a la Mostaza",
-                "Pescado al Horno", "Ceviche Fresco", "Rabas Fritas", "Paella", "Tortilla de Papas babé", "Revuelto Gramajo",
-                "Salchichas envueltas", "Pancho con Lluvia de Papas", "Pollo Frito estilo KFC", "Arepas Rellenas", "Tequeños de Queso",
-                "Lomito Completo", "Sándwich de Milanesa frío", "Ravioles con Tuco", "Sorrentinos de Jamón y Queso", "Pollo a la Crema",
-                "Pastel de Papa gratinado", "Tarta de Jamón y Queso", "Tarta de Choclo"
-            ],
-            plan: [
-                "Maratón de Pelis de Terror", "Noche de Juegos de Mesa", "Spa casero (Mascarillas y Baño)", "Caminata por un Parque Nuevo",
-                "Cena Romántica a la luz de las velas", "Netflix y cucharita en la cama", "Cocinar juntos un postre nuevo", "Ir a tomar un Helado",
-                "Noche de Tragos/Cócteles en casa", "Armar un Rompecabezas largo", "Escuchar un álbum completo y charlar", "Masajes mutuos relajantes",
-                "Hacer un Picnic en el living del piso", "Noche de Videojuegos (Mario Kart/etc)", "Salir a ver el Atardecer", "Merienda en una Cafetería Linda",
-                "Ir al Cine sin saber qué película hay", "Pedir delivery y no mover un dedo", "Maratón de una serie nueva en un día", "Noche de Trivia o Preguntados",
-                "Escapada de fin de semana espontánea", "Pasear por un Shopping solo viendo", "Karaoke con videos de YouTube", "Sesión de fotos juntos",
-                "Ordenar y limpiar la casa con música a tope", "Noche de Fondue de Chocolate", "Mirar las estrellas en silencio", "Planear el próximo viaje gigante",
-                "Pintar o dibujar juntos", "Jugar a las Cartas (Uno/Truco)", "Ir a un Bar nuevo a probar cervezas", "Leerse un libro en voz alta",
-                "Noche sin celulares (Prohibido pantallas)", "Ver fotos viejas de los dos", "Hacer Yoga o estiramiento en pareja", "Aprender a bailar una coreo de TikTok",
-                "Cocinar una receta difícil de YouTube", "Jugar al Tutti Frutti parajero", "Ver una peli que ambos odian para burlarse", "Ir a patinar o andar en bici"
-            ]
+            comida: ["Pizza Casera", "Sushi In/Out", "Hamburguesas Gourmet", "Ensalada César", "Pastas con Salsa Blanca", "Asado / Parrilla", "Picada completa", "Tacos al Pastor", "Fajitas de Pollo", "Empanadas al horno", "Pollo al Curry", "Risotto de Champiñones", "Milanesas con Puré", "Shawarma", "Lasaña", "Canelones de Verdura", "Ñoquis del 29", "Wok de Vegetales", "Cerdo agridulce", "Sopa Crema de Calabaza"],
+            plan: ["Maratón de Pelis de Terror", "Noche de Juegos de Mesa", "Spa casero (Mascarillas y Baño)", "Caminata por un Parque Nuevo", "Cena Romántica a la luz de las velas", "Netflix y cucharita en la cama", "Cocinar juntos un postre nuevo", "Ir a tomar un Helado", "Noche de Tragos/Cócteles en casa", "Armar un Rompecabezas largo", "Escuchar un álbum completo y charlar", "Masajes mutuos relajantes"]
         };
-
         let historia = { comida: [], plan: [] };
-
         function obtenerOpcionSinRepetir(tipo) {
             const banco = bancos[tipo];
-            let opcionesValidas = banco.filter(opt => !historia[tipo].includes(opt));
-            
-            if(opcionesValidas.length === 0) {
-                historia[tipo] = [];
-                opcionesValidas = banco;
-            }
-
-            const elegida = opcionesValidas[Math.floor(Math.random() * opcionesValidas.length)];
-            
-            historia[tipo].push(elegida);
-            if(historia[tipo].length > 15) historia[tipo].shift();
-
+            let opc = banco.filter(opt => !historia[tipo].includes(opt));
+            if(opc.length === 0) { historia[tipo] = []; opc = banco; }
+            const elegida = opc[Math.floor(Math.random() * opc.length)];
+            historia[tipo].push(elegida); if(historia[tipo].length > 10) historia[tipo].shift();
             return elegida;
         }
-
         function girarRuleta(tipo) {
             const res = document.getElementById(`res-${tipo}`);
             res.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-3xl text-white"></i>';
-            
-            setTimeout(() => {
-                const rnd = obtenerOpcionSinRepetir(tipo);
-                res.innerHTML = `<span class="text-white text-lg font-black uppercase tracking-wide text-center">${rnd}</span>`;
-            }, 800);
+            setTimeout(() => { res.innerHTML = `<span class="text-white text-lg font-black uppercase tracking-wide text-center">${obtenerOpcionSinRepetir(tipo)}</span>`; }, 800);
         }
 
-        // === ZONA PICANTE (Elegante pero Extrema) ===
         const bancoHot = {
-            acciones: [
-                "Hacer el amor lentamente en la pose de la Flor de Loto",
-                "Recorrer cada centímetro de su cuerpo con besos húmedos",
-                "Estimular su intimidad de forma suave y exquisita con la boca",
-                "Masaje erótico de cuerpo entero que termine en un éxtasis total",
-                "Entregarse a un 69 apasionado y sin prisa",
-                "Dar caricias firmes y nalgadas que despierten la piel",
-                "Besar su cuello y morder suavemente hasta erizarlo",
-                "Tomar el control arriba, marcando un ritmo profundo",
-                "Hacer el amor de pie, apoyados contra la pared",
-                "Penetración lenta y profunda mientras se miran a los ojos",
-                "Explorar la pose del perrito, pero con movimientos extremadamente lentos",
-                "Susurrar las fantasías más sucias al oído mientras se tocan",
-                "Sentarse sobre el rostro del otro y disfrutar",
-                "Besar su espalda baja y descender lentamente",
-                "Hacer el amor al borde de la cama, controlando las piernas",
-                "Terminar juntos, eligiendo el lugar perfecto sobre la piel",
-                "Unión profunda con las piernas sobre los hombros"
-            ],
-            tiempos: [
-                "durante 10 minutos seguidos", 
-                "hasta que el otro ruegue por más", 
-                "mientras tiene los ojos vendados", 
-                "con las manos atadas a la cama", 
-                "usando cubos de hielo en la piel",
-                "en completo y absoluto silencio",
-                "lento y profundo por 5 minutos",
-                "con la luz completamente apagada",
-                "guiándose solo por la respiración del otro"
-            ]
+            acciones: ["Hacer el amor lentamente en la pose de la Flor de Loto", "Recorrer cada centímetro de su cuerpo con besos húmedos", "Estimular su intimidad de forma suave y exquisita con la boca", "Masaje erótico de cuerpo entero que termine en un éxtasis total", "Entregarse a un 69 apasionado y sin prisa", "Dar caricias firmes y nalgadas que despierten la piel", "Besar su cuello y morder suavemente hasta erizarlo", "Tomar el control arriba, marcando un ritmo profundo", "Hacer el amor de pie, apoyados contra la pared", "Penetración lenta y profunda mientras se miran a los ojos", "Explorar la pose del perrito, pero con movimientos extremadamente lentos", "Susurrar las fantasías más sucias al oído mientras se tocan", "Sentarse sobre el rostro del otro y disfrutar", "Besar su espalda baja y descender lentamente", "Hacer el amor al borde de la cama, controlando las piernas", "Terminar juntos, eligiendo el lugar perfecto sobre la piel", "Unión profunda con las piernas sobre los hombros"],
+            tiempos: ["durante 10 minutos seguidos", "hasta que el otro ruegue por más", "mientras tiene los ojos vendados", "con las manos atadas a la cama", "usando cubos de hielo en la piel", "en completo y absoluto silencio", "lento y profundo por 5 minutos", "con la luz completamente apagada", "guiándose solo por la respiración del otro"]
         };
         let histHotAcc = [], histHotTi = [];
-
         function tirarDadoHot() {
             const div = document.getElementById('res-dado');
             div.innerHTML = '<i class="fa-solid fa-fire fa-beat text-4xl text-red-500 mb-2"></i>';
-            
             setTimeout(() => {
-                let validAcc = bancoHot.acciones.filter(a => !histHotAcc.includes(a));
-                if(validAcc.length === 0) { histHotAcc = []; validAcc = bancoHot.acciones; }
-                const ac = validAcc[Math.floor(Math.random() * validAcc.length)];
-                histHotAcc.push(ac); if(histHotAcc.length > 5) histHotAcc.shift();
+                let vA = bancoHot.acciones.filter(a => !histHotAcc.includes(a)); if(vA.length===0){histHotAcc=[]; vA=bancoHot.acciones;}
+                const ac = vA[Math.floor(Math.random() * vA.length)]; histHotAcc.push(ac); if(histHotAcc.length>5) histHotAcc.shift();
 
-                let validTi = bancoHot.tiempos.filter(t => !histHotTi.includes(t));
-                if(validTi.length === 0) { histHotTi = []; validTi = bancoHot.tiempos; }
-                const ti = validTi[Math.floor(Math.random() * validTi.length)];
-                histHotTi.push(ti); if(histHotTi.length > 3) histHotTi.shift();
+                let vT = bancoHot.tiempos.filter(t => !histHotTi.includes(t)); if(vT.length===0){histHotTi=[]; vT=bancoHot.tiempos;}
+                const ti = vT[Math.floor(Math.random() * vT.length)]; histHotTi.push(ti); if(histHotTi.length>3) histHotTi.shift();
                 
-                div.innerHTML = `
-                    <div class="text-xl font-black text-red-400 uppercase tracking-tighter leading-snug mb-4">${ac}</div>
-                    <div class="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-2 inline-flex items-center">
-                        <i class="fa-regular fa-clock text-pink-400 mr-2"></i>
-                        <span class="text-sm font-bold text-red-200 tracking-wide">${ti}</span>
-                    </div>
-                `;
+                div.innerHTML = `<div class="text-xl font-black text-red-400 uppercase tracking-tighter leading-snug mb-4">${ac}</div><div class="bg-red-900/30 border border-red-500/30 rounded-xl px-4 py-2 inline-flex items-center"><i class="fa-regular fa-clock text-pink-400 mr-2"></i><span class="text-sm font-bold text-red-200 tracking-wide">${ti}</span></div>`;
             }, 1000);
         }
 
-        // =========================================================
-        // === LÓGICA DE NEGOCIOS (3D Y ML) ========================
-        // =========================================================
+        // ================= NEGOCIOS =================
         function switchBusinessTab(tabId) {
-            document.getElementById('b-tab-3d').classList.add('hidden');
-            document.getElementById('b-tab-ml').classList.add('hidden');
+            document.getElementById('b-tab-3d').classList.add('hidden'); document.getElementById('b-tab-ml').classList.add('hidden');
             document.getElementById(`b-tab-${tabId}`).classList.remove('hidden');
-            
             document.getElementById('btn-tab-3d').className = "px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition";
             document.getElementById('btn-tab-ml').className = "px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition";
-            
-            let color = tabId === '3d' ? 'bg-blue-600 text-white shadow-lg' : 'bg-emerald-600 text-white shadow-lg';
-            document.getElementById(`btn-tab-${tabId}`).className = `px-6 py-2 rounded-full text-sm font-bold transition ${color}`;
+            document.getElementById(`btn-tab-${tabId}`).className = `px-6 py-2 rounded-full text-sm font-bold transition ${tabId==='3d'?'bg-blue-600 text-white shadow-lg':'bg-emerald-600 text-white shadow-lg'}`;
         }
         
         function calc3D() {
             const precioKG = parseFloat(document.getElementById('calc3d-precio-kg').value) || 23500;
             const gramos = parseFloat(document.getElementById('calc3d-gr').value) || 0;
             const horas = parseFloat(document.getElementById('calc3d-hs').value) || 0;
-
             const format = num => "$" + Math.round(num).toLocaleString('es-AR');
-
-            if(gramos === 0 && horas === 0) {
-                document.getElementById('res3d-costo').innerText = "$0";
-                document.getElementById('res3d-amigo').innerText = "$0";
-                document.getElementById('res3d-nube').innerText = "$0";
-                document.getElementById('res3d-ml').innerText = "$0";
-                return;
-            }
-
-            const costoMat = (precioKG / 1000) * gramos;
-            const costoMaq = horas * 200;
-            const costoBase = (costoMat + costoMaq) * 1.25;
-
+            if(gramos === 0 && horas === 0) { document.getElementById('res3d-costo').innerText = "$0"; document.getElementById('res3d-amigo').innerText = "$0"; document.getElementById('res3d-nube').innerText = "$0"; document.getElementById('res3d-ml').innerText = "$0"; return; }
+            const costoBase = ((precioKG / 1000) * gramos + horas * 200) * 1.25;
             document.getElementById('res3d-costo').innerText = format(costoBase);
             document.getElementById('res3d-amigo').innerText = format(costoBase * 1.5);
             document.getElementById('res3d-nube').innerText = `${format(costoBase * 2)} a ${format(costoBase * 2.5)}`;
@@ -913,194 +785,93 @@
         function calcML() {
             const usdt = parseFloat(document.getElementById('calcML-usdt').value) || 1582;
             const usd = parseFloat(document.getElementById('calcML-costo').value) || 0;
-            
             const format = num => "$" + Math.round(num).toLocaleString('es-AR');
-            const resPub = document.getElementById('resML-publicar');
-            const resGan = document.getElementById('resML-ganancia');
-
-            if(usd <= 0) { resPub.innerText = "$0"; resGan.innerText = "$0"; return; }
-
-            const usaTarjeta = document.getElementById('ml-tarjeta').checked;
-            const usaSocia = document.getElementById('ml-socia').checked;
-            const usaSirtac = document.getElementById('ml-sirtac').checked;
-            const usaEnvio = document.getElementById('ml-envio').checked;
-            const cuotas = parseFloat(document.getElementById('ml-cuotas').value);
+            if(usd <= 0) { document.getElementById('resML-publicar').innerText = "$0"; document.getElementById('resML-ganancia').innerText = "$0"; return; }
 
             const costoArs = usd * usdt;
-            const cTarjeta = usaTarjeta ? costoArs * 0.07 : 0;
-            const cEnvio = usaEnvio ? 12000 : 0;
-            const totalFijos = costoArs + cTarjeta + cEnvio;
-
-            let gananciaObj = 200000;
-            if(usd < 1000) gananciaObj = 150000;
-            else if(usd >= 1400) gananciaObj = 300000;
-
+            const totalFijos = costoArs + (document.getElementById('ml-tarjeta').checked ? costoArs * 0.07 : 0) + (document.getElementById('ml-envio').checked ? 12000 : 0);
+            const usaSocia = document.getElementById('ml-socia').checked;
+            
+            let gananciaObj = usd < 1000 ? 150000 : (usd >= 1400 ? 300000 : 200000);
             const gananciaBruta = usaSocia ? (gananciaObj / 0.86) : gananciaObj;
-            let feeML = 12.5;
-            let tPorc = (feeML/100) + (cuotas/100);
-            if(usaSirtac) tPorc += 0.015;
-
+            
+            let tPorc = 0.125 + (parseFloat(document.getElementById('ml-cuotas').value)/100) + (document.getElementById('ml-sirtac').checked ? 0.015 : 0);
             let pxC = (totalFijos + gananciaBruta) / (1 - tPorc);
-            if(pxC > 600000) {
-                tPorc += 0.07;
-                pxC = (totalFijos + gananciaBruta) / (1 - tPorc);
-            }
-
+            if(pxC > 600000) { tPorc += 0.07; pxC = (totalFijos + gananciaBruta) / (1 - tPorc); }
+            
             let pxF = Math.ceil(pxC / 50000) * 50000 - 1;
+            let gananciaNetaReal = pxF - costoArs - (totalFijos - costoArs) - (pxF * tPorc);
+            if(usaSocia) gananciaNetaReal *= 0.86;
 
-            let despML = pxF * (feeML/100);
-            let despCuotas = pxF * (cuotas/100);
-            let despSirtac = usaSirtac ? pxF * 0.015 : 0;
-            let despAfip = pxF > 600000 ? pxF * 0.07 : 0;
-
-            let gananciaRealBruta = pxF - costoArs - cTarjeta - cEnvio - despML - despCuotas - despSirtac - despAfip;
-            let gananciaNetaReal = usaSocia ? gananciaRealBruta * 0.86 : gananciaRealBruta;
-
-            resPub.innerText = format(pxF);
-            resGan.innerText = format(gananciaNetaReal);
+            document.getElementById('resML-publicar').innerText = format(pxF);
+            document.getElementById('resML-ganancia').innerText = format(gananciaNetaReal);
         }
 
-        // =========================================================
-        // === LÓGICA DE GASTOS CON FIREBASE (VISTA FINANZAS) ======
-        // =========================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyAY7CTfzbNy7l5f7nG3xrscrB-D-ehjW4Y",
-            authDomain: "gastos-flor-nahu.firebaseapp.com",
-            projectId: "gastos-flor-nahu",
-            storageBucket: "gastos-flor-nahu.firebasestorage.app",
-            messagingSenderId: "805147651129",
-            appId: "1:805147651129:web:e4ce55657949d7010b31e8",
-            measurementId: "G-8NFN60K20Z"
-        };
-        
+        // ================= FIREBASE (FINANZAS) =================
+        const firebaseConfig = { apiKey: "AIzaSyAY7CTfzbNy7l5f7nG3xrscrB-D-ehjW4Y", authDomain: "gastos-flor-nahu.firebaseapp.com", projectId: "gastos-flor-nahu", storageBucket: "gastos-flor-nahu.firebasestorage.app", messagingSenderId: "805147651129", appId: "1:805147651129:web:e4ce55657949d7010b31e8", measurementId: "G-8NFN60K20Z" };
         let db, COLLECTION_NAME;
         let transacciones = []; 
 
         function initGastos() {
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-            }
-            db = firebase.firestore();
-            COLLECTION_NAME = "transacciones_flornahu";
-
-            document.getElementById('monto').addEventListener('input', function() {
-                let rawValue = this.value.replace(/\./g, '').replace(/[^0-9]/g, ''); 
-                this.value = rawValue ? Math.round(parseInt(rawValue, 10)).toLocaleString('es-AR') : '';
-            });
-            
-            document.getElementById('esCuota').addEventListener('change', function() {
-                document.getElementById('cuotas-fields').classList.toggle('hidden', !this.checked);
-            });
-
+            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore(); COLLECTION_NAME = "transacciones_flornahu";
+            document.getElementById('monto').addEventListener('input', function() { let raw = this.value.replace(/\./g, '').replace(/[^0-9]/g, ''); this.value = raw ? Math.round(parseInt(raw, 10)).toLocaleString('es-AR') : ''; });
+            document.getElementById('esCuota').addEventListener('change', function() { document.getElementById('cuotas-fields').classList.toggle('hidden', !this.checked); });
             document.getElementById('transaccion-form').addEventListener('submit', handleFormSubmit);
-            document.getElementById('transaccion-list').addEventListener('click', e => {
-                const btn = e.target.closest('.btn-delete');
-                if (btn) borrarTransaccion(btn.getAttribute('data-id'));
-            });
-
+            document.getElementById('transaccion-list').addEventListener('click', e => { const btn = e.target.closest('.btn-delete'); if (btn) borrarTransaccion(btn.getAttribute('data-id')); });
             document.getElementById('filtro-deudas').addEventListener('change', renderizarTransacciones);
             document.getElementById('filtro-mes').addEventListener('change', renderizarTransacciones);
-
             cargarTransacciones();
         }
 
         async function cargarTransacciones() {
             try {
                 const snap = await db.collection(COLLECTION_NAME).orderBy('fecha', 'desc').get();
-                transacciones = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderizarTransacciones(); 
-            } catch (error) {
-                console.error("Error cargar transacciones: ", error);
-            }
+                transacciones = snap.docs.map(doc => ({ id: doc.id, ...doc.data() })); renderizarTransacciones(); 
+            } catch (error) { console.error(error); }
         }
 
         async function borrarTransaccion(id) {
             if (!confirm("¿Borrar gasto permanentemente?")) return;
             await db.collection(COLLECTION_NAME).doc(id).delete();
-            cargarTransacciones();
-            showToast("Gasto eliminado");
+            cargarTransacciones(); showToast("Gasto eliminado");
         }
 
         function renderizarTransacciones() {
-            const filtroMesSelect = document.getElementById('filtro-mes');
-            if(filtroMesSelect.options.length === 0) {
-                const hoy = new Date();
-                filtroMesSelect.innerHTML = `<option value="${hoy.getMonth()}-${hoy.getFullYear()}">Mes Actual</option>`;
-            }
-
-            let nahuDeboAFlor = 0, florDebeANahu = 0;
-            const listaDiv = document.getElementById('transaccion-list');
-            listaDiv.innerHTML = '';
-
+            const fMes = document.getElementById('filtro-mes');
+            if(fMes.options.length === 0) { const h = new Date(); fMes.innerHTML = `<option value="${h.getMonth()}-${h.getFullYear()}">Mes Actual</option>`; }
+            let nD = 0, fD = 0; const listaDiv = document.getElementById('transaccion-list'); listaDiv.innerHTML = '';
             transacciones.forEach(t => {
-                const montoADeber = t.paga100 ? t.monto : t.monto / 2;
-                if (t.pagador === 'Nahu') florDebeANahu += montoADeber;
-                else nahuDeboAFlor += montoADeber;
-
+                const mA = t.paga100 ? t.monto : t.monto / 2;
+                if (t.pagador === 'Nahu') fD += mA; else nD += mA;
                 let d = t.pagador === 'Nahu' ? 'Flor' : 'Nahu';
                 let cls = t.pagador === 'Nahu' ? 'text-pink-400 bg-pink-900/20' : 'text-blue-400 bg-blue-900/20';
-
                 listaDiv.innerHTML += `
                     <li class="glass p-3 flex justify-between items-center text-xs mb-2">
-                        <div>
-                            <strong class="text-white block">${t.descripcion}</strong>
-                            <span class="text-gray-400">${t.pagador} pagó total. ${d} debe su parte.</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-bold ${cls} px-2 py-1 rounded border border-white/5">$${Math.round(montoADeber).toLocaleString('es-AR')}</span>
-                            <button class="btn-delete text-red-500/50 hover:text-red-400 p-1" data-id="${t.id}"><i class="fa-solid fa-trash"></i></button>
-                        </div>
+                        <div><strong class="text-white block">${t.descripcion}</strong><span class="text-gray-400">${t.pagador} pagó total. ${d} debe.</span></div>
+                        <div class="flex items-center gap-2"><span class="font-bold ${cls} px-2 py-1 rounded border border-white/5">$${Math.round(mA).toLocaleString('es-AR')}</span><button class="btn-delete text-red-500/50 hover:text-red-400 p-1" data-id="${t.id}"><i class="fa-solid fa-trash"></i></button></div>
                     </li>`;
             });
-
-            const saldo = florDebeANahu - nahuDeboAFlor;
-            const info = document.getElementById('saldo-neto-info');
-            if (saldo > 0) info.innerHTML = `<span class="text-pink-400">Flor debe $${saldo.toLocaleString('es-AR')}</span>`;
-            else if (saldo < 0) info.innerHTML = `<span class="text-blue-400">Nahu debe $${Math.abs(saldo).toLocaleString('es-AR')}</span>`;
+            const s = fD - nD; const info = document.getElementById('saldo-neto-info');
+            if (s > 0) info.innerHTML = `<span class="text-pink-400">Flor debe $${s.toLocaleString('es-AR')}</span>`;
+            else if (s < 0) info.innerHTML = `<span class="text-blue-400">Nahu debe $${Math.abs(s).toLocaleString('es-AR')}</span>`;
             else info.innerHTML = `<span class="text-green-400">Están a mano 🙌</span>`;
         }
 
         async function handleFormSubmit(e) {
             e.preventDefault();
-            const rawMonto = document.getElementById('monto').value.replace(/\./g, '').replace(/[^0-9]/g, '');
-            const monto = parseInt(rawMonto, 10);
-            
-            if (isNaN(monto) || monto <= 0) {
-                showToast("Monto inválido", true);
-                return;
-            }
-
-            const t = {
-                monto,
-                descripcion: document.getElementById('descripcion').value,
-                pagador: document.getElementById('pagador').value,
-                esCuota: document.getElementById('esCuota').checked,
-                paga100: document.getElementById('paga100').checked,
-                fecha: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            await db.collection(COLLECTION_NAME).add(t);
-            document.getElementById('transaccion-form').reset();
-            cargarTransacciones();
-            
-            document.getElementById('form-content').classList.add('hidden');
-            document.getElementById('animacion-container').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('animacion-container').classList.add('hidden');
-                document.getElementById('form-content').classList.remove('hidden');
-            }, 2000);
+            const rM = document.getElementById('monto').value.replace(/\./g, '').replace(/[^0-9]/g, ''); const m = parseInt(rM, 10);
+            if (isNaN(m) || m <= 0) { showToast("Monto inválido", true); return; }
+            await db.collection(COLLECTION_NAME).add({ monto: m, descripcion: document.getElementById('descripcion').value, pagador: document.getElementById('pagador').value, esCuota: document.getElementById('esCuota').checked, paga100: document.getElementById('paga100').checked, fecha: firebase.firestore.FieldValue.serverTimestamp() });
+            document.getElementById('transaccion-form').reset(); cargarTransacciones();
+            document.getElementById('form-content').classList.add('hidden'); document.getElementById('animacion-container').classList.remove('hidden');
+            setTimeout(() => { document.getElementById('animacion-container').classList.add('hidden'); document.getElementById('form-content').classList.remove('hidden'); }, 2000);
         }
 
-        // =========================================================
-        // === INICIO (Llamamos a initGastos acá para no duplicar) =
-        // =========================================================
+        // ================= INICIO DE APP =================
         window.onload = () => {
-            renderPastillas();
-            renderPuntos();
-            renderRutina();
-            initGastos(); // Inicializa Firebase y Finanzas
+            renderPastillas(); renderPuntos(); renderRutina(); renderIdeas(); renderTerrenos(); initGastos();
         };
-
     </script>
 </body>
 </html>

@@ -1,27 +1,831 @@
-<!-- ================= NAVEGACIÓN INFERIOR (CORREGIDA) ================= -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flor & Nahu ❤️</title>
+    
+    <!-- Meta etiquetas para PWA (App de iPhone) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="F & N">
+    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #111827);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 1.5rem;
+        }
+
+        .glass-hot {
+            background: rgba(220, 38, 38, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            box-shadow: 0 4px 30px rgba(220, 38, 38, 0.1);
+        }
+
+        .heartbeat { animation: heartbeat 1.5s infinite; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); color: #ef4444; }
+        }
+
+        /* Ocultar scrollbar pero permitir scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Switch Custom para el Negocio */
+        input:checked + .slider { background-color: #3b82f6; }
+        input:checked + .slider-ml { background-color: #10b981; }
+    </style>
+</head>
+<body class="pb-28 pt-6 px-4 md:px-8 flex justify-center items-start">
+
+    <div class="max-w-md w-full mx-auto">
+        
+        <!-- ================= HEADER (SIEMPRE VISIBLE) ================= -->
+        <header class="text-center space-y-3 mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight">Flor <i class="fa-solid fa-heart heartbeat text-pink-500"></i> Nahu</h1>
+            <div class="glass p-3 flex justify-around text-center border-t border-white/10">
+                <div><span class="block text-xl font-bold text-pink-400">3</span><span class="text-[10px] uppercase tracking-wider text-gray-400">Años</span></div>
+                <div><span class="block text-xl font-bold text-pink-400">5</span><span class="text-[10px] uppercase tracking-wider text-gray-400">Meses</span></div>
+                <div><span class="block text-xl font-bold text-pink-400">12</span><span class="text-[10px] uppercase tracking-wider text-gray-400">Días</span></div>
+            </div>
+        </header>
+
+        <!-- ================= VISTA 1: INICIO ================= -->
+        <div id="view-home" class="view-section space-y-6">
+            
+            <!-- Pastillero Triple -->
+            <div class="glass p-5">
+                <h2 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider"><i class="fa-solid fa-pills text-purple-400 mr-2"></i>Control de Pastillas</h2>
+                <div class="grid grid-cols-3 gap-3">
+                    <div id="pastilla-f-m" class="bg-black/30 p-3 rounded-xl text-center border border-white/5 cursor-pointer transition active:scale-95" onclick="togglePastilla('f-m')">
+                        <p class="text-[10px] text-gray-400 mb-1">Flor</p>
+                        <i class="fa-solid fa-sun text-xl text-yellow-400 mb-1"></i>
+                        <p class="text-[10px] font-bold">10:00 AM</p>
+                        <div class="mt-2 text-xs font-bold text-red-400 status">Pendiente</div>
+                    </div>
+                    <div id="pastilla-n-m" class="bg-black/30 p-3 rounded-xl text-center border border-white/5 cursor-pointer transition active:scale-95" onclick="togglePastilla('n-m')">
+                        <p class="text-[10px] text-gray-400 mb-1">Nahu</p>
+                        <i class="fa-solid fa-sun text-xl text-blue-400 mb-1"></i>
+                        <p class="text-[10px] font-bold">10:00 AM</p>
+                        <div class="mt-2 text-xs font-bold text-red-400 status">Pendiente</div>
+                    </div>
+                    <div id="pastilla-f-n" class="bg-black/30 p-3 rounded-xl text-center border border-white/5 cursor-pointer transition active:scale-95" onclick="togglePastilla('f-n')">
+                        <p class="text-[10px] text-gray-400 mb-1">Flor</p>
+                        <i class="fa-solid fa-moon text-xl text-indigo-400 mb-1"></i>
+                        <p class="text-[10px] font-bold">10:00 PM</p>
+                        <div class="mt-2 text-xs font-bold text-red-400 status">Pendiente</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mercado de Favores -->
+            <div class="glass p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-store text-yellow-400 mr-2"></i>Mercado de Favores</h2>
+                </div>
+                
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between items-center bg-black/20 p-3 rounded-xl border border-white/5 cursor-pointer hover:bg-white/5 transition" onclick="abrirTienda('Flor')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center font-bold shadow-lg shadow-pink-500/30">F</div>
+                            <div>
+                                <p class="text-sm font-semibold">Flor</p>
+                                <p class="text-xs text-yellow-400 font-bold" id="pts-flor">1,250 pts</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-500"></i>
+                    </div>
+
+                    <div class="flex justify-between items-center bg-black/20 p-3 rounded-xl border border-white/5 cursor-pointer hover:bg-white/5 transition" onclick="abrirTienda('Nahu')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold shadow-lg shadow-blue-500/30">N</div>
+                            <div>
+                                <p class="text-sm font-semibold">Nahu</p>
+                                <p class="text-xs text-yellow-400 font-bold" id="pts-nahu">840 pts</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <button onclick="toggleModal('modal-puntos')" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-bold transition flex justify-center items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-plus text-green-400"></i> Registrar Buena Acción
+                </button>
+            </div>
+
+            <!-- Rutina Sincronizada -->
+            <div class="glass p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-calendar-days text-blue-400 mr-2"></i>Nuestra Rutina</h2>
+                    <button onclick="agregarRutina()" class="text-blue-400 hover:text-white transition"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="space-y-2" id="lista-rutina">
+                    <!-- Eventos generados por JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= VISTA 2: FINANZAS (FIREBASE) ================= -->
+        <div id="view-finance" class="view-section hidden space-y-6">
+            
+            <div class="glass p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-scale-balanced text-green-400 mr-2"></i>Balance Mensual</h2>
+                    <select id="filtro-mes" class="bg-black/40 border border-white/10 rounded-lg p-1.5 text-xs text-white outline-none"></select>
+                </div>
+                
+                <div id="saldo-neto-container" class="bg-black/30 rounded-xl p-4 border border-white/10 text-center transition-all mb-4">
+                    <span id="mes-actual-display" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1"></span>
+                    <p id="saldo-neto-info" class="text-xl font-black text-white">Calculando...</p>
+                </div>
+
+                <select id="filtro-deudas" class="w-full bg-black/40 border border-white/10 rounded-xl p-2.5 text-sm text-gray-300 outline-none mb-4">
+                    <option value="total">Ver Balance Neto (Total)</option>
+                    <option value="Flor">Solo deudas de Flor a Nahu</option>
+                    <option value="Nahu">Solo deudas de Nahu a Flor</option>
+                </select>
+
+                <!-- Historial -->
+                <ul id="transaccion-list" class="space-y-2 max-h-60 overflow-y-auto no-scrollbar pb-2">
+                    <!-- JS inyectará los gastos aquí -->
+                </ul>
+            </div>
+
+            <!-- Nuevo Gasto Formulario -->
+            <div class="glass p-5" id="form-content">
+                <h2 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider"><i class="fa-solid fa-receipt text-green-400 mr-2"></i>Registrar Gasto</h2>
+                <form id="transaccion-form" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" id="monto" inputmode="numeric" required placeholder="Monto ($)" class="w-full bg-black/30 border border-white/10 rounded-xl py-2 px-3 text-white text-sm outline-none">
+                        <input type="text" id="descripcion" required placeholder="Concepto" class="w-full bg-black/30 border border-white/10 rounded-xl py-2 px-3 text-white text-sm outline-none">
+                    </div>
+                    
+                    <select id="pagador" required class="w-full bg-black/30 border border-white/10 rounded-xl py-2 px-3 text-white text-sm outline-none">
+                        <option value="Nahu">Lo pagó Nahu</option>
+                        <option value="Flor">Lo pagó Flor</option>
+                    </select>
+
+                    <div class="flex gap-4 bg-black/20 p-3 rounded-xl border border-white/5">
+                        <label class="flex items-center space-x-2 text-[11px] text-gray-300 cursor-pointer">
+                            <input type="checkbox" id="paga100" class="w-4 h-4">
+                            <span>Gasto Individual (100%)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 text-[11px] text-gray-300 cursor-pointer">
+                            <input type="checkbox" id="esCuota" class="w-4 h-4">
+                            <span>Es a Cuotas</span>
+                        </label>
+                    </div>
+
+                    <div id="cuotas-fields" class="hidden bg-black/30 p-3 rounded-xl border border-dashed border-white/20">
+                        <label class="text-[10px] text-gray-400 font-bold mb-1 block">¿En cuántas cuotas se pagó?</label>
+                        <input type="number" id="cuotasPendientes" min="1" value="1" class="w-full bg-black/30 border border-white/10 rounded-xl py-2 px-3 text-white text-sm outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 py-3 rounded-xl font-bold text-white shadow-lg active:scale-95 transition">Guardar Gasto</button>
+                </form>
+            </div>
+
+            <!-- Animación Guardado -->
+            <div id="animacion-container" class="glass p-5 text-center hidden flex flex-col items-center justify-center min-h-[250px]">
+                <img id="animacion-gif" src="https://media.giphy.com/media/94EQmVHkveNck/giphy.gif" alt="Gasto registrado" class="w-full max-w-[200px] mx-auto rounded-xl">
+                <p class="text-sm font-bold text-green-400 mt-4">¡Gasto guardado en la nube!</p>
+            </div>
+        </div>
+
+        <!-- ================= VISTA 3: JUEGOS Y PICANTE ================= -->
+        <div id="view-games" class="view-section hidden space-y-6">
+            
+            <!-- Ruleta Planes -->
+            <div class="glass p-5 text-center">
+                <h2 class="text-sm font-bold text-gray-300 mb-2 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot text-indigo-400 mr-2"></i>¿Qué hacemos hoy?</h2>
+                <div id="res-plan" class="text-lg font-bold text-white h-16 flex items-center justify-center italic bg-black/20 rounded-xl border border-white/5 mb-3">Toca para elegir un plan</div>
+                <button onclick="girarRuleta('plan')" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold shadow-lg shadow-indigo-500/30 transition active:scale-95">Girar Ruleta de Planes</button>
+            </div>
+
+            <!-- Ruleta Comida -->
+            <div class="glass p-5 text-center border-t border-green-500/30">
+                <h2 class="text-sm font-bold text-gray-300 mb-2 uppercase tracking-wider"><i class="fa-solid fa-burger text-green-400 mr-2"></i>¿Qué Comemos?</h2>
+                <div id="res-comida" class="text-lg font-bold text-white h-16 flex items-center justify-center italic bg-black/20 rounded-xl border border-white/5 mb-3">Se acabó el "lo que quieras"</div>
+                <button onclick="girarRuleta('comida')" class="w-full bg-green-600 hover:bg-green-500 py-3 rounded-xl font-bold shadow-lg shadow-green-500/30 transition active:scale-95">Girar Ruleta de Comida</button>
+            </div>
+
+            <!-- ZONA PICANTE (Extrema según request) -->
+            <div class="glass-hot p-5 rounded-2xl relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 opacity-10 text-9xl"><i class="fa-solid fa-fire"></i></div>
+                <h2 class="text-xl font-bold text-red-500 mb-2"><i class="fa-solid fa-fire-flame-curved mr-2"></i>Zona Picante</h2>
+                <p class="text-xs text-gray-300 mb-4">Modo extremo y sin filtros. 🔥</p>
+
+                <div class="bg-black/40 p-4 rounded-xl border border-red-500/30 text-center relative z-10">
+                    <div id="res-dado" class="min-h-[100px] flex flex-col items-center justify-center italic">
+                        <span class="text-sm text-gray-400">Toca el botón si se animan...</span>
+                    </div>
+                    <button onclick="tirarDadoHot()" class="mt-4 w-full bg-gradient-to-r from-red-700 to-red-500 py-3 rounded-xl font-bold shadow-lg shadow-red-500/40 transition active:scale-95 text-white">
+                        Tirar Dados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= VISTA 4: NEGOCIO (3D + APPILAR) ================= -->
+        <div id="view-business" class="view-section hidden space-y-6">
+            
+            <!-- Selector de Negocio Flotante -->
+            <div class="flex bg-black/40 p-1 rounded-full border border-white/10 mb-6 mx-auto w-fit">
+                <button onclick="switchBusinessTab('3d')" id="btn-tab-3d" class="px-6 py-2 rounded-full text-sm font-bold bg-blue-600 text-white shadow-lg transition">3D</button>
+                <button onclick="switchBusinessTab('ml')" id="btn-tab-ml" class="px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition">Appilar Store</button>
+            </div>
+
+            <!-- SECCIÓN 3D -->
+            <div id="b-tab-3d" class="space-y-6">
+                <div class="glass p-5">
+                    <h2 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider"><i class="fa-solid fa-cube text-blue-400 mr-2"></i>Calculadora 3D</h2>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="text-[10px] text-gray-400 uppercase font-bold">Material</label>
+                            <select class="w-full bg-black/30 border border-white/10 rounded-xl p-2 text-sm text-white outline-none">
+                                <option>PLA Estándar</option>
+                                <option>PETG</option>
+                                <option>TPU / Flex</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-gray-400 uppercase font-bold">Precio Kilo ($)</label>
+                            <input type="number" id="calc3d-precio-kg" value="23500" oninput="calc3D()" class="w-full bg-black/30 border border-white/10 rounded-xl p-2 text-sm text-white outline-none font-bold text-blue-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-black/20 p-3 rounded-xl border border-white/5">
+                            <label class="text-[10px] text-gray-400 uppercase font-bold mb-1 block">Gramos</label>
+                            <input type="number" id="calc3d-gr" placeholder="0" oninput="calc3D()" class="w-full bg-transparent text-xl font-bold text-white outline-none">
+                        </div>
+                        <div class="bg-black/20 p-3 rounded-xl border border-white/5">
+                            <label class="text-[10px] text-gray-400 uppercase font-bold mb-1 block">Horas (Decimal)</label>
+                            <input type="number" id="calc3d-hs" placeholder="0.0" step="0.1" oninput="calc3D()" class="w-full bg-transparent text-xl font-bold text-white outline-none">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center p-3 bg-white/5 rounded-xl">
+                            <span class="text-xs text-gray-400">Costo Base (+25%)</span>
+                            <span class="font-bold" id="res3d-costo">$0</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-900/20 border border-blue-500/30 rounded-xl">
+                            <span class="text-xs text-blue-300 font-bold">Precio Conocidos (x1.5)</span>
+                            <span class="font-bold text-blue-400" id="res3d-amigo">$0</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-900/20 border border-purple-500/30 rounded-xl">
+                            <span class="text-xs text-purple-300 font-bold">TiendaNube</span>
+                            <span class="font-bold text-purple-400" id="res3d-nube">$0</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-xl">
+                            <span class="text-xs text-yellow-300 font-bold">MercadoLibre (+20%)</span>
+                            <span class="font-bold text-yellow-400" id="res3d-ml">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN APPILAR STORE (MERCADOLIBRE) -->
+            <div id="b-tab-ml" class="space-y-6 hidden">
+                <div class="glass p-5">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-sm font-bold text-gray-300 uppercase tracking-wider"><i class="fa-solid fa-box-open text-emerald-400 mr-2"></i>Cotizador ML</h2>
+                        <div class="text-right">
+                            <label class="text-[9px] text-gray-400 uppercase font-bold">USDT Rate</label>
+                            <input type="number" id="calcML-usdt" value="1582" oninput="calcML()" class="bg-black/30 w-20 px-2 py-1 rounded text-emerald-400 font-bold text-xs outline-none text-right border border-white/10">
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 p-4 rounded-xl border border-white/10 mb-5 relative">
+                        <label class="text-[10px] text-gray-400 uppercase font-bold mb-1 block">Costo Producto (USD)</label>
+                        <div class="flex items-center">
+                            <span class="text-emerald-500 font-bold mr-2">u$s</span>
+                            <input type="number" id="calcML-costo" placeholder="0.00" oninput="calcML()" class="w-full bg-transparent text-2xl font-bold text-white outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Botones Toggle Modernos en lugar de checkboxes -->
+                    <div class="grid grid-cols-2 gap-3 mb-5">
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" id="ml-tarjeta" onchange="calcML()" class="peer sr-only">
+                            <div class="p-3 rounded-xl bg-black/20 border border-white/5 text-center peer-checked:bg-emerald-900/30 peer-checked:border-emerald-500/50 transition">
+                                <span class="text-xs font-bold text-gray-400 peer-checked:text-emerald-400 block mb-1">Tarjeta (7%)</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" id="ml-socia" onchange="calcML()" class="peer sr-only">
+                            <div class="p-3 rounded-xl bg-black/20 border border-white/5 text-center peer-checked:bg-emerald-900/30 peer-checked:border-emerald-500/50 transition">
+                                <span class="text-xs font-bold text-gray-400 peer-checked:text-emerald-400 block mb-1">Busca Flor (14%)</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" id="ml-sirtac" onchange="calcML()" class="peer sr-only">
+                            <div class="p-3 rounded-xl bg-black/20 border border-white/5 text-center peer-checked:bg-emerald-900/30 peer-checked:border-emerald-500/50 transition">
+                                <span class="text-xs font-bold text-gray-400 peer-checked:text-emerald-400 block mb-1">SIRTAC 1.5%</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="checkbox" id="ml-envio" onchange="calcML()" class="peer sr-only">
+                            <div class="p-3 rounded-xl bg-black/20 border border-white/5 text-center peer-checked:bg-emerald-900/30 peer-checked:border-emerald-500/50 transition">
+                                <span class="text-xs font-bold text-gray-400 peer-checked:text-emerald-400 block mb-1">Envío ($12k)</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="text-[10px] text-gray-400 uppercase font-bold block mb-2">Modalidad ML (Cuotas)</label>
+                        <select id="ml-cuotas" onchange="calcML()" class="w-full bg-black/30 border border-white/10 rounded-xl p-3 text-sm text-white outline-none">
+                            <option value="0">Contado (Clásica)</option>
+                            <option value="5">Premium (Bajo Interés 5%)</option>
+                            <option value="8.4">3 Sin Interés (8.4%)</option>
+                            <option value="12.3">6 Sin Interés (12.3%)</option>
+                        </select>
+                    </div>
+
+                    <!-- Resultados ML -->
+                    <div class="bg-gradient-to-br from-gray-900 to-black p-5 rounded-2xl border border-emerald-500/30 shadow-lg mt-6">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Precio a Publicar</p>
+                        <p class="text-4xl font-black text-white tracking-tight mb-4" id="resML-publicar">$0</p>
+                        
+                        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3">
+                            <p class="text-[10px] text-emerald-300 uppercase font-bold mb-1">Tu Ganancia Neta Libre</p>
+                            <p class="text-2xl font-bold text-emerald-400" id="resML-ganancia">$0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= NAVEGACIÓN INFERIOR (ARREGLADA PARA COMPU Y CELU) ================= -->
     <nav class="fixed bottom-0 left-0 right-0 w-full bg-[#0f172a]/95 backdrop-blur-md border-t border-white/10 z-50">
-        <!-- El flex-row justify-around fuerza a que estén siempre uno al lado del otro -->
+        <!-- El flex-row justify-around fuerza a que estén siempre uno al lado del otro horizontalmente -->
         <div class="max-w-md mx-auto flex flex-row justify-around items-center text-gray-400 text-xs pt-3 pb-6 px-2">
             
             <div onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center cursor-pointer text-white transition-all transform hover:scale-110 w-16 text-center">
                 <i class="fa-solid fa-house mb-1 text-[20px]"></i>
-                <span class="font-medium mt-1">Inicio</span>
+                <span class="font-medium mt-1 text-[10px]">Inicio</span>
             </div>
             
             <div onclick="switchTab('finance')" id="nav-finance" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
                 <i class="fa-solid fa-wallet mb-1 text-[20px]"></i>
-                <span class="font-medium mt-1">Finanzas</span>
+                <span class="font-medium mt-1 text-[10px]">Finanzas</span>
             </div>
             
             <div onclick="switchTab('games')" id="nav-games" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
                 <i class="fa-solid fa-gamepad mb-1 text-[20px]"></i>
-                <span class="font-medium mt-1">Juegos</span>
+                <span class="font-medium mt-1 text-[10px]">Juegos</span>
             </div>
             
             <div onclick="switchTab('business')" id="nav-business" class="flex flex-col items-center cursor-pointer hover:text-white transition-all transform hover:scale-110 w-16 text-center">
                 <i class="fa-solid fa-briefcase mb-1 text-[20px]"></i>
-                <span class="font-medium mt-1">Negocio</span>
+                <span class="font-medium mt-1 text-[10px]">Negocio</span>
             </div>
             
         </div>
     </nav>
+
+    <!-- MODALES -->
+    <div id="modal-puntos" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-gray-900 border border-white/10 rounded-2xl p-5 w-full max-w-sm">
+            <h3 class="text-lg font-bold mb-4">Sumar Puntos</h3>
+            <div class="space-y-2 max-h-60 overflow-y-auto no-scrollbar">
+                <div class="p-3 bg-white/5 rounded-xl">
+                    <p class="text-sm mb-2">Lavar los platos (50 pts)</p>
+                    <div class="flex gap-2">
+                        <button onclick="sumarPuntos('Flor', 50)" class="flex-1 bg-pink-500/20 text-pink-400 py-1 rounded">Flor</button>
+                        <button onclick="sumarPuntos('Nahu', 50)" class="flex-1 bg-blue-500/20 text-blue-400 py-1 rounded">Nahu</button>
+                    </div>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl">
+                    <p class="text-sm mb-2">Hacer el desayuno/cena (100 pts)</p>
+                    <div class="flex gap-2">
+                        <button onclick="sumarPuntos('Flor', 100)" class="flex-1 bg-pink-500/20 text-pink-400 py-1 rounded">Flor</button>
+                        <button onclick="sumarPuntos('Nahu', 100)" class="flex-1 bg-blue-500/20 text-blue-400 py-1 rounded">Nahu</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="toggleModal('modal-puntos')" class="mt-4 w-full bg-red-500/20 text-red-400 py-2 rounded-xl font-bold">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // === NAVEGACIÓN ===
+        function switchTab(tabId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('nav div').forEach(el => {
+                el.classList.remove('text-white');
+                el.classList.add('text-gray-400');
+            });
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.remove('text-gray-400');
+            document.getElementById(`nav-${tabId}`).classList.add('text-white');
+        }
+
+        function switchBusinessTab(tabId) {
+            document.getElementById('b-tab-3d').classList.add('hidden');
+            document.getElementById('b-tab-ml').classList.add('hidden');
+            document.getElementById(`b-tab-${tabId}`).classList.remove('hidden');
+            
+            // Estilos de botones top
+            document.getElementById('btn-tab-3d').className = "px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition";
+            document.getElementById('btn-tab-ml').className = "px-6 py-2 rounded-full text-sm font-bold text-gray-400 hover:text-white transition";
+            
+            let color = tabId === '3d' ? 'bg-blue-600 text-white shadow-lg' : 'bg-emerald-600 text-white shadow-lg';
+            document.getElementById(`btn-tab-${tabId}`).className = `px-6 py-2 rounded-full text-sm font-bold transition ${color}`;
+        }
+
+        // === ESTADO LOCAL ===
+        let appState = JSON.parse(localStorage.getItem('flornahu_state')) || {
+            puntosFlor: 1250, puntosNahu: 840,
+            rutina: [{ id: 1, texto: "Clase Baile Flor", color: "pink", fecha: "Martes 18:00" }],
+            pastillas: { 'f-m': false, 'n-m': false, 'f-n': false }
+        };
+
+        function saveState() {
+            localStorage.setItem('flornahu_state', JSON.stringify(appState));
+        }
+
+        // === PASTILLAS ===
+        function renderPastillas() {
+            ['f-m', 'n-m', 'f-n'].forEach(id => {
+                let div = document.getElementById(`pastilla-${id}`);
+                let status = div.querySelector('.status');
+                if (appState.pastillas[id]) {
+                    div.classList.replace('bg-black/30', 'bg-green-900/30');
+                    div.classList.replace('border-white/5', 'border-green-500/50');
+                    status.innerText = "Tomada ✓";
+                    status.classList.replace('text-red-400', 'text-green-400');
+                } else {
+                    div.classList.replace('bg-green-900/30', 'bg-black/30');
+                    div.classList.replace('border-green-500/50', 'border-white/5');
+                    status.innerText = "Pendiente";
+                    status.classList.replace('text-green-400', 'text-red-400');
+                }
+            });
+        }
+        function togglePastilla(id) {
+            appState.pastillas[id] = !appState.pastillas[id];
+            saveState();
+            renderPastillas();
+        }
+
+        // === PUNTOS ===
+        function renderPuntos() {
+            document.getElementById('pts-flor').innerText = appState.puntosFlor + " pts";
+            document.getElementById('pts-nahu').innerText = appState.puntosNahu + " pts";
+        }
+        function sumarPuntos(quien, cant) {
+            if (quien === 'Flor') appState.puntosFlor += cant;
+            else appState.puntosNahu += cant;
+            saveState();
+            renderPuntos();
+            toggleModal('modal-puntos');
+            alert(`¡Se le sumaron ${cant} puntos a ${quien}!`);
+        }
+        function abrirTienda(quien) {
+            let pts = quien === 'Flor' ? appState.puntosFlor : appState.puntosNahu;
+            if (confirm(`Tienda de ${quien} (${pts} pts).\n\n¿Canjear Masaje de 20 min por 300 pts?`)) {
+                if (pts >= 300) {
+                    if (quien === 'Flor') appState.puntosFlor -= 300;
+                    else appState.puntosNahu -= 300;
+                    saveState();
+                    renderPuntos();
+                    alert("¡Canje exitoso! Prepará las manos.");
+                } else {
+                    alert("No te alcanzan los puntos todavía.");
+                }
+            }
+        }
+        function toggleModal(id) {
+            const m = document.getElementById(id);
+            m.classList.toggle('hidden');
+        }
+
+        // === JUEGOS Y RULETAS ===
+        function girarRuleta(tipo) {
+            const res = document.getElementById(`res-${tipo}`);
+            res.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-2xl text-white"></i>';
+            
+            const opciones = tipo === 'comida' 
+                ? ["Pizza Casera", "Hamburguesas", "Sushi", "Ensalada", "Pastas", "Asado/Parrilla", "Picada", "Tacos/Fajitas", "Empanadas", "Pollo al horno"]
+                : ["Maratón de Pelis", "Salir a Caminar", "Noche de Juegos", "Spa en Casa", "Cena Romántica", "Netflix en la cama", "Bake Off (Cocinar juntos)"];
+
+            setTimeout(() => {
+                const rnd = opciones[Math.floor(Math.random() * opciones.length)];
+                res.innerHTML = `<span class="text-white text-xl uppercase tracking-wide">${rnd}</span>`;
+            }, 800);
+        }
+
+        // === ZONA PICANTE (EXACTO LO SOLICITADO) ===
+        function tirarDadoHot() {
+            const div = document.getElementById('res-dado');
+            div.innerHTML = '<i class="fa-solid fa-fire fa-beat text-3xl text-red-500 mb-2"></i>';
+            
+            // Acciones explícitas requeridas por el usuario
+            const acciones = [
+                "Coger en misionero",
+                "Chupar la concha",
+                "Chupar las tetas",
+                "Masaje erótico en todo el cuerpo",
+                "Hacer sexo oral (69)",
+                "Dar nalgadas suaves",
+                "Besar el cuello y morder suavemente",
+                "Montar arriba",
+                "Venirse adentro/afuera (lo que elijan)"
+            ];
+            const tiempos = ["por 5 minutos", "durante 10 minutos", "hasta no aguantar más", "mientras el otro tiene los ojos vendados", "lentamente por 3 minutos"];
+
+            setTimeout(() => {
+                const ac = acciones[Math.floor(Math.random() * acciones.length)];
+                const ti = tiempos[Math.floor(Math.random() * tiempos.length)];
+                
+                div.innerHTML = `
+                    <div class="text-2xl font-black text-red-500 uppercase tracking-tighter leading-none mb-3">${ac}</div>
+                    <div class="bg-red-900/40 border border-red-500/50 rounded-lg px-3 py-1 inline-flex items-center">
+                        <i class="fa-regular fa-clock text-red-400 mr-2"></i>
+                        <span class="text-sm font-bold text-red-200">${ti}</span>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        // === NEGOCIOS: 3D ===
+        function calc3D() {
+            const precioKG = parseFloat(document.getElementById('calc3d-precio-kg').value) || 23500;
+            const gramos = parseFloat(document.getElementById('calc3d-gr').value) || 0;
+            const horas = parseFloat(document.getElementById('calc3d-hs').value) || 0;
+
+            const format = num => "$" + Math.round(num).toLocaleString('es-AR');
+
+            if(gramos === 0 && horas === 0) {
+                document.getElementById('res3d-costo').innerText = "$0";
+                document.getElementById('res3d-amigo').innerText = "$0";
+                document.getElementById('res3d-nube').innerText = "$0";
+                document.getElementById('res3d-ml').innerText = "$0";
+                return;
+            }
+
+            const costoMat = (precioKG / 1000) * gramos;
+            const costoMaq = horas * 200;
+            const costoBase = (costoMat + costoMaq) * 1.25;
+
+            document.getElementById('res3d-costo').innerText = format(costoBase);
+            document.getElementById('res3d-amigo').innerText = format(costoBase * 1.5);
+            document.getElementById('res3d-nube').innerText = `${format(costoBase * 2)} a ${format(costoBase * 2.5)}`;
+            document.getElementById('res3d-ml').innerText = format(costoBase * 2 * 1.20);
+        }
+
+        // === NEGOCIOS: APPILAR STORE (ML) ===
+        function calcML() {
+            const usdt = parseFloat(document.getElementById('calcML-usdt').value) || 1582;
+            const usd = parseFloat(document.getElementById('calcML-costo').value) || 0;
+            
+            const format = num => "$" + Math.round(num).toLocaleString('es-AR');
+            const resPub = document.getElementById('resML-publicar');
+            const resGan = document.getElementById('resML-ganancia');
+
+            if(usd <= 0) { resPub.innerText = "$0"; resGan.innerText = "$0"; return; }
+
+            const usaTarjeta = document.getElementById('ml-tarjeta').checked;
+            const usaSocia = document.getElementById('ml-socia').checked;
+            const usaSirtac = document.getElementById('ml-sirtac').checked;
+            const usaEnvio = document.getElementById('ml-envio').checked;
+            const cuotas = parseFloat(document.getElementById('ml-cuotas').value);
+
+            const costoArs = usd * usdt;
+            const cTarjeta = usaTarjeta ? costoArs * 0.07 : 0;
+            const cEnvio = usaEnvio ? 12000 : 0;
+            const totalFijos = costoArs + cTarjeta + cEnvio;
+
+            let gananciaObj = 200000;
+            if(usd < 1000) gananciaObj = 150000;
+            else if(usd >= 1400) gananciaObj = 300000;
+
+            const gananciaBruta = usaSocia ? (gananciaObj / 0.86) : gananciaObj; // 14% socia
+            let feeML = 12.5; // Porcentaje base ML clásico
+            let tPorc = (feeML/100) + (cuotas/100);
+            if(usaSirtac) tPorc += 0.015;
+
+            let pxC = (totalFijos + gananciaBruta) / (1 - tPorc);
+            if(pxC > 600000) {
+                tPorc += 0.07; // AFIP
+                pxC = (totalFijos + gananciaBruta) / (1 - tPorc);
+            }
+
+            // Redondeo psicológico
+            let pxF = Math.ceil(pxC / 50000) * 50000 - 1;
+
+            // Ganancia Real Inversa
+            let despML = pxF * (feeML/100);
+            let despCuotas = pxF * (cuotas/100);
+            let despSirtac = usaSirtac ? pxF * 0.015 : 0;
+            let despAfip = pxF > 600000 ? pxF * 0.07 : 0;
+
+            let gananciaRealBruta = pxF - costoArs - cTarjeta - cEnvio - despML - despCuotas - despSirtac - despAfip;
+            let gananciaNetaReal = usaSocia ? gananciaRealBruta * 0.86 : gananciaRealBruta;
+
+            resPub.innerText = format(pxF);
+            resGan.innerText = format(gananciaNetaReal);
+        }
+
+        // === RUTINA ===
+        function renderRutina() {
+            const lista = document.getElementById('lista-rutina');
+            lista.innerHTML = appState.rutina.map(r => `
+                <div class="bg-black/20 p-2 rounded-lg border border-white/5 flex justify-between items-center text-xs">
+                    <div>
+                        <span class="inline-block w-2 h-2 rounded-full bg-${r.color}-400 mr-2"></span>
+                        <span class="text-white font-bold">${r.texto}</span>
+                    </div>
+                    <span class="text-gray-400">${r.fecha}</span>
+                </div>
+            `).join('');
+        }
+        function agregarRutina() {
+            const texto = prompt("Qué evento es? (Ej: Clase Nahu)");
+            if (!texto) return;
+            const fecha = prompt("Día y Hora (Ej: Lunes 20:00)");
+            const color = prompt("Color? (pink para Flor, blue para Nahu)");
+            appState.rutina.push({ id: Date.now(), texto, fecha, color: color || 'green' });
+            saveState();
+            renderRutina();
+        }
+
+        // === INICIO ===
+        window.onload = () => {
+            renderPastillas();
+            renderPuntos();
+            renderRutina();
+            initGastos(); // Llama a la lógica de Firebase de abajo
+        };
+        
+        // =========================================================
+        // === LÓGICA DE GASTOS CON FIREBASE (VISTA FINANZAS) ======
+        // =========================================================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAY7CTfzbNy7l5f7nG3xrscrB-D-ehjW4Y",
+            authDomain: "gastos-flor-nahu.firebaseapp.com",
+            projectId: "gastos-flor-nahu",
+            storageBucket: "gastos-flor-nahu.firebasestorage.app",
+            messagingSenderId: "805147651129",
+            appId: "1:805147651129:web:e4ce55657949d7010b31e8",
+            measurementId: "G-8NFN60K20Z"
+        };
+        
+        let db, COLLECTION_NAME;
+        let transacciones = []; 
+        const MESES = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
+
+        function initGastos() {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            db = firebase.firestore();
+            COLLECTION_NAME = "transacciones_flornahu";
+
+            document.getElementById('monto').addEventListener('input', function() {
+                let rawValue = this.value.replace(/\./g, '').replace(/[^0-9]/g, ''); 
+                this.value = rawValue ? Math.round(parseInt(rawValue, 10)).toLocaleString('es-AR') : '';
+            });
+            
+            document.getElementById('esCuota').addEventListener('change', function() {
+                document.getElementById('cuotas-fields').classList.toggle('hidden', !this.checked);
+            });
+
+            document.getElementById('transaccion-form').addEventListener('submit', handleFormSubmit);
+            document.getElementById('transaccion-list').addEventListener('click', e => {
+                const btn = e.target.closest('.btn-delete');
+                if (btn) borrarTransaccion(btn.getAttribute('data-id'));
+            });
+
+            document.getElementById('filtro-deudas').addEventListener('change', renderizarTransacciones);
+            document.getElementById('filtro-mes').addEventListener('change', renderizarTransacciones);
+
+            cargarTransacciones();
+        }
+
+        async function cargarTransacciones() {
+            try {
+                const snap = await db.collection(COLLECTION_NAME).orderBy('fecha', 'desc').get();
+                transacciones = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderizarTransacciones(); 
+            } catch (error) {
+                console.error("Error cargar transacciones: ", error);
+            }
+        }
+
+        async function borrarTransaccion(id) {
+            if (!confirm("¿Borrar gasto?")) return;
+            await db.collection(COLLECTION_NAME).doc(id).delete();
+            cargarTransacciones();
+        }
+
+        function renderizarTransacciones() {
+            const filtroMesSelect = document.getElementById('filtro-mes');
+            if(filtroMesSelect.options.length === 0) {
+                const hoy = new Date();
+                filtroMesSelect.innerHTML = `<option value="${hoy.getMonth()}-${hoy.getFullYear()}">Mes Actual</option>`;
+            }
+
+            let nahuDeboAFlor = 0, florDebeANahu = 0;
+            const listaDiv = document.getElementById('transaccion-list');
+            listaDiv.innerHTML = '';
+
+            transacciones.forEach(t => {
+                const montoADeber = t.paga100 ? t.monto : t.monto / 2;
+                if (t.pagador === 'Nahu') florDebeANahu += montoADeber;
+                else nahuDeboAFlor += montoADeber;
+
+                let d = t.pagador === 'Nahu' ? 'Flor' : 'Nahu';
+                let cls = t.pagador === 'Nahu' ? 'text-pink-400 bg-pink-900/20' : 'text-blue-400 bg-blue-900/20';
+
+                listaDiv.innerHTML += `
+                    <li class="glass p-3 flex justify-between items-center text-xs">
+                        <div>
+                            <strong class="text-white block">${t.descripcion}</strong>
+                            <span class="text-gray-400">${t.pagador} pagó total. ${d} debe su parte.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold ${cls} px-2 py-1 rounded">$${Math.round(montoADeber).toLocaleString('es-AR')}</span>
+                            <button class="btn-delete text-red-500" data-id="${t.id}"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </li>`;
+            });
+
+            const saldo = florDebeANahu - nahuDeboAFlor;
+            const info = document.getElementById('saldo-neto-info');
+            if (saldo > 0) info.innerHTML = `<span class="text-pink-400">Flor debe $${saldo.toLocaleString('es-AR')}</span>`;
+            else if (saldo < 0) info.innerHTML = `<span class="text-blue-400">Nahu debe $${Math.abs(saldo).toLocaleString('es-AR')}</span>`;
+            else info.innerHTML = `<span class="text-green-400">Están a mano 🙌</span>`;
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const rawMonto = document.getElementById('monto').value.replace(/\./g, '').replace(/[^0-9]/g, '');
+            const monto = parseInt(rawMonto, 10);
+            
+            if (isNaN(monto) || monto <= 0) return alert("Monto inválido");
+
+            const t = {
+                monto,
+                descripcion: document.getElementById('descripcion').value,
+                pagador: document.getElementById('pagador').value,
+                esCuota: document.getElementById('esCuota').checked,
+                paga100: document.getElementById('paga100').checked,
+                fecha: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            await db.collection(COLLECTION_NAME).add(t);
+            document.getElementById('transaccion-form').reset();
+            cargarTransacciones();
+            
+            document.getElementById('form-content').classList.add('hidden');
+            document.getElementById('animacion-container').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('animacion-container').classList.add('hidden');
+                document.getElementById('form-content').classList.remove('hidden');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
